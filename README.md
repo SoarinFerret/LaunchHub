@@ -19,15 +19,15 @@ A style sheet by Google, it allows for beautifully created web sites following t
 
 While Material Design is nice, some of the features are difficult and clunky to implement. MaterializeCSS is a beta product designed to fix those issues.
 
-### Webserver: Nginx
- - [Documentation](https://docs.nginx.com/)
-
-Nginx is a fast, well-documented, well-known, and easily managed web server that can act as a load balancer for our scaleable application.
-
 ### Server-side Language: Node.js
  - [Documentation](https://nodejs.org/en/docs/)
 
 Node.js has the benefit of just being easy to use JavaScript, without the extra bloat needed with Django. Plus, Django just has a lot of nice, but unnecessary functionality for this specific application.
+
+### Webserver: Nginx
+ - [Documentation](https://docs.nginx.com/)
+
+Nginx is a fast, well-documented, well-known, and easily managed web server that can act as a load balancer for our scaleable application.
 
 ### Backend Datastore: Redis
  - [Documentation](https://redis.io/documentation)
