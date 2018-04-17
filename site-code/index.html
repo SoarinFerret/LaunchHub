@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+<head>
+    <title>Launch Viewer</title>
+    <link rel="shortcut icon" href="./images/favicon.ico" />
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="./css/material-components-web.min.css"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet" />
+    <link rel="stylesheet" href="./css/my.css" />
+
+    <!-- JS -->
+    <!-- load angular and angular route via CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular-route.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular-animate.js"></script>
+    <script src="cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.2/jquery.scrollTo.min.js"></script>
+    <script src="./js/script.js"></script>
+    <script src="./js/material-components-web.min.js"></script>
+</head>
+
+<body ng-app="app" class="mdc-theme--background">
+    <!-- HEADER AND NAVBAR -->
+    <style>
+        .mdc-toolbar__row:first-child::after {
+            background-image: url("./images/header-background-2.jpg");
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+    <header class="mdc-toolbar mdc-toolbar--fixed mdc-toolbar--waterfall mdc-toolbar--flexible mdc-toolbar--flexible-default-behavior">
+        <div class="mdc-toolbar__row">
+            <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
+                <a class="material-icons mdc-toolbar__icon mdc-toolbar__menu-icon mdc-ripple-upgraded--unbounded mdc-ripple-upgraded scroll-top"
+                    style="--mdc-ripple-fg-size:28.799999999999997px; --mdc-ripple-left:10px; --mdc-ripple-top:10px; --mdc-ripple-fg-scale:1.6666666666666667;"
+                    aria-label="Home" href="#!/" alt="Home">home</a>
+                <a class="mdc-toolbar__title mdc-theme--text-primary-on-primary underline-on-hover scroll-top" href="#!/">Launch Viewer</a>
+            </section>
+        </div>
+    </header>
+    <script>
+        var toolbar = mdc.toolbar.MDCToolbar.attachTo(document.querySelector('.mdc-toolbar'));
+        toolbar.fixedAdjustElement = document.querySelector('.mdc-toolbar-fixed-adjust');
+        var menuEl = document.querySelector('#menu');
+        var menu = new mdc.menu.MDCMenu(menuEl);
+        var toggle = document.querySelector('#menuButton');
+        toggle.addEventListener('click', function () {
+            menu.open = !menu.open;
+        });
+        $('.underline-on-hover').hover(function () {
+            $(this).css({ 'text-decoration': 'underline' });
+        }, function () {
+            $(this).css({ 'text-decoration': 'none' });
+        });
+        $('.scroll-top').click(function () {
+            $(window).scrollTo(0, 200);
+        })
+    </script>
+    <!-- MAIN CONTENT AND INJECTED VIEWS -->
+    <main id="main" class="mdc-toolbar-fixed-adjust mdc-theme--background" style="margin-top: 256px">
+    
+        <!-- this is where content will be injected -->
+        <div ng-view></div>
+    </main>
+</body>
+
+</html>
