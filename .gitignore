@@ -1,11 +1,5 @@
 # Stuff I added
 *.code-workspace
 
-# Stuff djangogirls added
-*.pyc
-*~
-__pycache__
-myvenv
-db.sqlite3
-/static
-.DS_Store
+# not ready to commit
+docker-compose.yml
