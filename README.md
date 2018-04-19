@@ -38,3 +38,14 @@ Recommended by many all over, redis is being used as a caching componet so we do
  - [Documentation](https://docs.docker.com/compose/)
 
 What now seems to be the defacto deployment method, docker-compose allows us to build scalable, cross-platform, and easily replicated environments for both production and development purposes.
+
+# Deploying the Application
+To run the webapp on its own, simply build the container and run it using the below code. 
+_Please note that the variable $PROJECTSOURCE is the root directory of this project_
+```
+$ cd $PROJECTSOURCE
+$ docker build -t webapp .
+$ docker run -d -p 8080:8080 -v $PROJECTSOURCE/site-code:/usr/src/app webapp
+```
+
+Then, to view the webpage, go to your browser and type in ```http://127.0.0.1:8080```
