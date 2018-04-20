@@ -3,7 +3,7 @@ var express = require('express');
 var app = express();
 
 // configuration
-app.use(express.static(path.join(__dirname, 'public/app')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // listener
 app.listen(8080);
