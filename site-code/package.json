@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@material/ripple": "^0.34.1",
     "express": "^4.16.3"
   }
 }
