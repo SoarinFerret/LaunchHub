@@ -55,10 +55,7 @@ app.controller('Home_Controller', function ($scope) {
                 }
 
 
-<<<<<<< HEAD
-=======
                 // Not sure what this does, but it fixed an issue I was having
->>>>>>> Daniel
                 $scope.$applyAsync();
 
                 // Fades out the progress ring that appears when loading the page
