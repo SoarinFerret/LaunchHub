@@ -1,16 +1,29 @@
 <div layout="row" style="padding-top: 10px;">
     <div flex></div>
-    <div style="width: 90%; max-width: 1440px;">
+    <div layout="column" style="width: 90%; max-width: 1440px;">
         <!-- Header -->
         <div layout="row">
-            <div flex></div>
-            <div class="mdc-typography">
-                <h1 id="homeHeader" class="md-display-2" style="color: #fff; margin-top: 0px; margin-bottom: 15px;">{{ launch.name }}</h1>
+            <div layout="column">
+                <div flex></div>
+                <md-button href="#!/" class="md-icon-button md-accent scroll-top" aria-label="Home">
+                    <md-icon style="fill: #fff;" md-svg-icon="images/back.svg"></md-icon>
+                </md-button>
+                <div flex></div>
             </div>
+            <div flex></div>
+            <h1 id="homeHeader" class="md-display-2" style="color: #fff; margin-top: 0px; margin-bottom: 15px;">{{ launch.name }}</h1>
             <div flex></div>
         </div>
         <md-divider style="border-top-color: #C4C4C4; margin-bottom: 15px;"></md-divider>
-        <!-- End Header -->
+
+        <div layout="row">
+            <div flex="50" layout="column">
+                <md-card style="min-height: 100px;"></md-card>
+            </div>
+            <div flex="50">
+                <md-card style="min-height: 100px;"></md-card>
+            </div>
+        </div>
     </div>
     <div flex></div>
 </div>
