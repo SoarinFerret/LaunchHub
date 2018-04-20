@@ -1,0 +1,32 @@
+.ng-leave {
+	animation: scaleOut 0.2s both ease-in-out;
+}
+
+.ng-enter {
+	animation: scaleIn 0.3s both ease-in-out;
+	animation-delay: 0.21s;
+}
+
+/* scale up */
+
+@keyframes scaleIn {
+	from {
+		opacity: 0.0;
+		transform: scale(0.9);
+	}
+}
+
+@keyframes scaleOut {
+	to {
+		opacity: 0.0;
+		transform: scale(1);
+	}
+}
+
+.chip {
+	transition: transform 0.15s;
+}
+
+.chip:hover {
+	transform: translate(3px);
+}

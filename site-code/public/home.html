@@ -1,0 +1,49 @@
+<div layout="row" style="padding-top: 10px;">
+    <div flex></div>
+    <div style="width: 90%; max-width: 1440px;">
+        <div layout="row">
+            <div flex></div>
+            <div class="mdc-typography">
+                <h1 id="homeHeader" class="md-display-2" style="color: #fff; margin-top: 0px; margin-bottom: 15px;">Launches</h1>
+            </div>
+            <div flex></div>
+        </div>
+        <md-divider style="border-top-color: #C4C4C4; margin-bottom: 15px;"></md-divider>
+        <div id="loader" layout="row" layout-sm="column" layout-align="space-around" style="height: 100%; margin-top: 100px;">
+            <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+        </div>
+        <!-- End Header -->
+        <div>
+
+            <!-- Card HTML here -->
+            <md-card style="margin: 0px; margin-bottom: 20px; height: 100%; min-height: 350px; background-color: #C4C4C4; position: relative;" ng-repeat="launch in launches">
+                <div layout="row" flex>
+                    <div flex="50">
+                        <div style="background-color: #000; width: 100%; height: 100%;">
+                            <span style="color: #FFF;">Map Here</span>
+                        </div>
+                    </div>
+                    <div flex="50">
+                        <md-card-content>
+
+                            <!-- Card Text and Info Here -->
+
+                            <h2 class="md-headline" style="margin-top: 5px">{{ launch.name }}</h2>
+                            <p>launch date &amp; time here</p>
+                            
+                            <!-- End Card Text and Info -->
+
+                        </md-card-content>
+                        <md-button ng-click="ViewDetails(launch)" style="padding-left: 15px; padding-right: 15px; position: absolute; bottom: 10px; right: 10px;" class="md-raised md-accent md-hue-2">
+                            <span style="font-size: 16px;">View Details</span>
+                        </md-button>
+                    </div>
+                </div>
+            </md-card>
+            <!-- End Card HTML -->
+
+        </div>
+    </div>
+    <div flex>
+    </div>
+</div>
