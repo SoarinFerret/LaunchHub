@@ -18,12 +18,16 @@ app.config(function ($routeProvider) {
         .when('/about', {
             templateUrl: '../about.html'
         })
+        .when('/launchdetail', {
+            templateUrl: '../launchdetail.html',
+            controller: 'Launch_Detail_Controller'
+        })
         .otherwise({
             redirectTo: '/'
         })
 });
 
-app.controller('Home_Controller', function ($scope) {
+app.controller('Home_Controller', function ($scope, $location, Data_Transfer_Service) {
 
     // For testing
     $(document).ready(setTimeout(function () {
@@ -37,16 +41,29 @@ app.controller('Home_Controller', function ($scope) {
         // this function is called right after the ajax request is complete
         function callback() {
             return function (data, textStatus, jqXHR) {
-                
+
                 // "data" variable is returned by ajax request
 
                 // use the $scope variable to link variables between here and the HTML
                 // $scope.launches would be accessible inside HTML as the "launches" variable (an array in this example)
                 $scope.launches = data.launches;
 
+                // Not sure what this does, but it fixed an issue I was having
+                $scope.$applyAsync();
+
+                // This function is called when a "View Details" button is pressed; var i is the index of the launch.
+                $scope.ViewDetails = function (i) {
+                    // Store the launch in our service
+                    Data_Transfer_Service.set($scope.launches[i]);
+                    // Nagivate to details page
+                    $location.path("launchdetail");
+                    // Scroll to Top of Page
+                    $(window).scrollTo(0, 200);
+                };
+
                 // Get weather data here
                 for (var i = 0; i < $scope.launches.length; i++) {
-                    
+
                     // Parse currentLaunch JSON object to find location
 
                     // Get weather data based on location (maybe based on lat/long)
@@ -54,14 +71,33 @@ app.controller('Home_Controller', function ($scope) {
                     // launches[i].weather = ajaxreturn weather object
                 }
 
-
-                // Not sure what this does, but it fixed an issue I was having
-                $scope.$applyAsync();
-
                 // Fades out the progress ring that appears when loading the page
                 $('#loader').fadeOut(300);
             }
         }
     }, 500));
+});
+
+app.controller('Launch_Detail_Controller', function ($scope, Data_Transfer_Service, $location) {
+    //Get the launch we stored in the service
+    $scope.launch = Data_Transfer_Service.get();
+    if ($scope.launch.name == null) $location.path('home');
+});
+
+app.factory('Data_Transfer_Service', function () {
+    var savedData = {}
+
+    function set(data) {
+        savedData = data;
+    }
+
+    function get() {
+        return savedData;
+    }
+
+    return {
+        set: set,
+        get: get
+    }
 
 });
