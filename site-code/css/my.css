@@ -19,7 +19,7 @@
 @keyframes scaleOut {
 	to {
 		opacity: 0.0;
-		transform: translate(0px, 50px);
+		transform: scale(1);
 	}
 }
 

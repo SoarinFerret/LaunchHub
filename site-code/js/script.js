@@ -51,14 +51,14 @@ app.controller('Home_Controller', function ($scope, $location, Data_Transfer_Ser
                 // Not sure what this does, but it fixed an issue I was having
                 $scope.$applyAsync();
 
-                // This function is called when a "View Details" button is pressed; var i is the index of the launch.
-                $scope.ViewDetails = function (i) {
+                // This function is called when a "View Details" button is pressed, the launch JSON object is passed as parameter
+                $scope.ViewDetails = function (launch) {
                     // Store the launch in our service
-                    Data_Transfer_Service.set($scope.launches[i]);
+                    Data_Transfer_Service.set(launch);
                     // Nagivate to details page
                     $location.path("launchdetail");
                     // Scroll to Top of Page
-                    $(window).scrollTo(0, 200);
+                    $(window).scrollTo(195, 200);
                 };
 
                 // Get weather data here
