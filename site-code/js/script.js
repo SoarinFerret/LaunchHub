@@ -34,8 +34,7 @@ app.controller('Home_Controller', function ($scope) {
             return function (data, textStatus, jqXHR) {
                 $scope.launches = data.launches;
                 $scope.$applyAsync();
-                $('#homeHeader').text('Launches');
-                $('.top-arrow').fadeIn();
+                $('#loader').fadeOut(300);
             }
         }
     }, 500));

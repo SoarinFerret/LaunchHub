@@ -3,15 +3,16 @@
     <div style="width: 90%; max-width: 1440px;">
         <!-- Header -->
         <div layout="row">
-            <h1 class="md-display-2 top-arrow" style="color:#fff; margin-top: 0px; margin-bottom: 15px;"><i class="material-icons">arrow_downward</i></h1>
             <div flex></div>
             <div class="mdc-typography">
-                <h1 id="homeHeader" class="md-display-2" style="color: #fff; margin-top: 0px; margin-bottom: 15px;">Loading...</h1>
+                <h1 id="homeHeader" class="md-display-2" style="color: #fff; margin-top: 0px; margin-bottom: 15px;">Launches</h1>
             </div>
             <div flex></div>
-            <h1 class="md-display-2 top-arrow" style="color:#fff; margin-top: 0px; margin-bottom: 15px;"><i class="material-icons">arrow_downward</i></h1>
         </div>
         <md-divider style="border-top-color: #C4C4C4; margin-bottom: 15px;"></md-divider>
+        <div id="loader" layout="row" layout-sm="column" layout-align="space-around" style="height: 100%; margin-top: 100px;">
+            <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+        </div>
         <div>
             <md-card style="margin: 0px; margin-bottom: 20px; height: 100%; min-height: 350px; background-color: #C4C4C4; position: relative;"
                 ng-repeat="launch in launches">
