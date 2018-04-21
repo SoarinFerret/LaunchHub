@@ -22,11 +22,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.2/jquery.scrollTo.min.js"></script>
     <script src="./js/script.js"></script>
     <script src="./js/material-components-web.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDiQJlIJdOGVvuUXT-IlrQr_LV7f_GRzlo" async defer></script>
 </head>
 
 <body ng-app="app" class="mdc-theme--background">
     <!-- HEADER AND NAVBAR -->
     <style>
+        .mapcanvas {
+            height: 300px;
+            width: 100%;
+        }
+
         .mdc-toolbar__row:first-child::after {
             background-image: url("./images/header-background-2.jpg");
             background-size: cover;
@@ -47,7 +53,7 @@
                 <div class="mdc-menu-anchor">
                     <div class="mdc-menu" tabindex="-1" id="menu" style="transform-origin: right top 0px; right: 0px; top: 0px; background: #fff;">
                         <ul class="mdc-menu__items mdc-list" role="menu" aria-hidden="true" style="transform: scale(1, 1);">
-                            <a href="#!/about" class="mdc-list-item scroll-top" role="menuitem" tabindex="0" style="transition-delay: 0.069s;">About</a>
+                            <a href="#!/about" class="mdc-list-item" role="menuitem" tabindex="0" style="transition-delay: 0.069s;">About</a>
                         </ul>
                     </div>
                 </div>
