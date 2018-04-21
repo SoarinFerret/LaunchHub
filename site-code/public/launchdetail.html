@@ -61,7 +61,7 @@
                             <i>{{ launch.rocket.familyname }}</i>
                         </span>
                     </div>
-                    <div layout="column" style="margin-bottom: 15px;" ng-if="launch.missions[0].agencies.length > 0">
+                    <div layout="column" style="margin-bottom: 15px;" ng-if="launch.rocket.agencies.length > 0">
                         <div ng-switch on="launch.rocket.agencies.length">
                             <span ng-switch-when="1" class="md-subhead">Agency:</span>
                             <span ng-switch-default class="md-subhead">Agencies:</span>
@@ -76,6 +76,10 @@
                                 </div>
                             </md-list-item>
                         </md-list>
+                    </div>
+                    <div ng-if="launch.rocket.imageURL.length > 0" layout="column">
+                        <span class="md-subhead" style="margin-bottom: 10px;">Image:</span>
+                        <img style="width: auto; max-height: 400px;" ng-src="{{launch.rocket.imageURL}}">
                     </div>
                 </md-card>
                 <md-card style="background-color: #E4E4E4; min-height: 100px; padding: 20px; margin: 0px; margin-bottom: 20px;">

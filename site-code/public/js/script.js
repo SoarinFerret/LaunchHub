@@ -47,26 +47,31 @@ app.controller('Home_Controller', function ($scope, $location, Data_Transfer_Ser
                 for (var i = 0; i < $scope.launches.length; i++) {
                     var s = $scope.launches[i].name;
                     $scope.launches[i].name = s.substring(s.indexOf('|') + 2).trim();
+                    
+                    if ($scope.launches[i].rocket.imageURL == null || $scope.launches[i].rocket.imageURL.includes('placeholder')) $scope.launches[i].rocket.imageURL = "";
 
-                    if ($scope.launches[i].missions[0] == null || $scope.launches[i].missions[0].agencies == null) continue;
-                    for (var j = 0; j < $scope.launches[i].missions[0].agencies.length; j++) {
-                        if ($scope.launches[i].missions[0].agencies[j].countryCode.includes(",")) {
-                            var splitCodesArray = $scope.launches[i].missions[0].agencies[j].countryCode.split(",");
-                            $scope.launches[i].missions[0].agencies[j].countryCode = splitCodesArray[0].trim() + " & " + (+splitCodesArray.length - 1) + " more";
+                    if (!($scope.launches[i].missions[0] == null || $scope.launches[i].missions[0].agencies == null)) {
+                        for (var j = 0; j < $scope.launches[i].missions[0].agencies.length; j++) {
+                            if ($scope.launches[i].missions[0].agencies[j].countryCode.includes(",")) {
+                                var splitCodesArray = $scope.launches[i].missions[0].agencies[j].countryCode.split(",");
+                                $scope.launches[i].missions[0].agencies[j].countryCode = splitCodesArray[0].trim() + " & " + (+splitCodesArray.length - 1) + " more";
+                            }
                         }
                     }
-                    if ($scope.launches[i].location.pads[0] == null || $scope.launches[i].location.pads[0].agencies == null) continue;
-                    for (var j = 0; j < $scope.launches[i].location.pads[0].agencies.length; j++) {
-                        if ($scope.launches[i].location.pads[0].agencies[j].countryCode.includes(",")) {
-                            var splitCodesArray = $scope.launches[i].location.pads[0].agencies[j].countryCode.split(",");
-                            $scope.launches[i].location.pads[0].agencies[j].countryCode = splitCodesArray[0].trim() + " & " + (+splitCodesArray.length - 1) + " more";
+                    if (!($scope.launches[i].location.pads[0] == null || $scope.launches[i].location.pads[0].agencies == null)) {
+                        for (var j = 0; j < $scope.launches[i].location.pads[0].agencies.length; j++) {
+                            if ($scope.launches[i].location.pads[0].agencies[j].countryCode.includes(",")) {
+                                var splitCodesArray = $scope.launches[i].location.pads[0].agencies[j].countryCode.split(",");
+                                $scope.launches[i].location.pads[0].agencies[j].countryCode = splitCodesArray[0].trim() + " & " + (+splitCodesArray.length - 1) + " more";
+                            }
                         }
                     }
-                    if ($scope.launches[i].rocket == null || $scope.launches[i].rocket.agencies == null) continue;
-                    for (var j = 0; j < $scope.launches[i].rocket.agencies.length; j++) {
-                        if ($scope.launches[i].rocket.agencies[j].countryCode.includes(",")) {
-                            var splitCodesArray = $scope.launches[i].rocket.agencies[j].countryCode.split(",");
-                            $scope.launches[i].rocket.agencies[j].countryCode = splitCodesArray[0].trim() + " & " + (+splitCodesArray.length - 1) + " more";
+                    if (!($scope.launches[i].rocket == null || $scope.launches[i].rocket.agencies == null)) {
+                        for (var j = 0; j < $scope.launches[i].rocket.agencies.length; j++) {
+                            if ($scope.launches[i].rocket.agencies[j].countryCode.includes(",")) {
+                                var splitCodesArray = $scope.launches[i].rocket.agencies[j].countryCode.split(",");
+                                $scope.launches[i].rocket.agencies[j].countryCode = splitCodesArray[0].trim() + " & " + (+splitCodesArray.length - 1) + " more";
+                            }
                         }
                     }
                 }
