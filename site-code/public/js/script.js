@@ -47,7 +47,7 @@ app.controller('Home_Controller', function ($scope, $location, Data_Transfer_Ser
                 for (var i = 0; i < $scope.launches.length; i++) {
                     var s = $scope.launches[i].name;
                     $scope.launches[i].name = s.substring(s.indexOf('|') + 2).trim();
-                    
+
                     if ($scope.launches[i].rocket.imageURL == null || $scope.launches[i].rocket.imageURL.includes('placeholder')) $scope.launches[i].rocket.imageURL = "";
 
                     if (!($scope.launches[i].missions[0] == null || $scope.launches[i].missions[0].agencies == null)) {
@@ -121,10 +121,25 @@ app.controller('Launch_Detail_Controller', function ($scope, Data_Transfer_Servi
     //$(window).scrollTo(195, 200);
     //Get the launch we stored in the service
     $scope.launch = Data_Transfer_Service.get();
+    //If the Launch Detail page is navigated to prematurely, redirect to home
     if ($scope.launch.name == null) $location.path('home');
+    //Creates the map element for the details page
     createMap($scope.launch, 'detailsMap');
+    //CSS animations
     animateDetailsPage();
+    //Scroll page
     $(window).scrollTo(195, 200);
+
+    setTimeout(function () {
+        var leftColumnHeight = $('#launch-overview-card').height() + $('#rocket-card').height() + $('#weather-card').height();
+        var rightColumnHeight = $('#mission-card').height() + $('#launch-pad-card').height();
+        if (leftColumnHeight > rightColumnHeight) {
+            $('#launch-pad-card').height($('#launch-pad-card').height() + leftColumnHeight - rightColumnHeight + 60);
+        }
+        else if (rightColumnHeight > leftColumnHeight) {
+            $('#weather-card').height($('#weather-card').height() + rightColumnHeight - leftColumnHeight - 60);
+        }
+    }, 500);
 });
 
 app.factory('Data_Transfer_Service', function () {
@@ -169,8 +184,9 @@ function createMap(launch, id) {
     };
     var map = new google.maps.Map(document.getElementById(id), {
         center: latLong,
-        zoom: 8,
-        styles: googleMapsStyle
+        zoom: 14,
+        //styles: googleMapsStyle,
+        mapTypeId: google.maps.MapTypeId.HYBRID
     });
     var marker = new google.maps.Marker({
         position: latLong,
