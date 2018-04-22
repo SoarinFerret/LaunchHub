@@ -11,6 +11,8 @@
   "dependencies": {
     "@material/ripple": "^0.34.1",
     "express": "^4.16.3",
-    "iorejson": "^0.1.1"
+    "redis": "^2.8.0",
+    "redis-rejson": "^1.0.0",
+    "request": "^2.85.0"
   }
 }
