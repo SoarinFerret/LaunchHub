@@ -60,6 +60,3 @@ typings/
 # Stuff I added
 *.code-workspace
 codytest.js
-
-# not ready to commit
-docker-compose.yml

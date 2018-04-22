@@ -7,10 +7,10 @@ const fetch = require("node-fetch");
 
 // Redis Connection
 let client = null;
-var host = process.env.REDIS_PORT_6379_TCP_ADDR || '127.0.0.1';
-var port = process.env.REDIS_PORT_6379_TCP_PORT || 6379;
+var host = 'rediscache';
+var port = 6379;
 console.log("Redis connection = " + host + ':' + port);
-var client = redis.createClient(port, host);
+client = redis.createClient(port, host);
 
 // timestamp for API Caching
 var ttlLaunch = Date.now();
