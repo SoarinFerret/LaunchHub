@@ -35,7 +35,7 @@ app.controller('Home_Controller', function ($scope, $location, Data_Transfer_Ser
         $.ajax({
             async: true,
             type: "GET",
-            url: "https://launchlibrary.net/1.3/launch/next/20",
+            url: "/api/launch?",
             success: callback()
         });
 
