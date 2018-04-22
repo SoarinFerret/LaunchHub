@@ -138,9 +138,12 @@ app.controller('Launch_Detail_Controller', function ($scope, Data_Transfer_Servi
         var rightColumnHeight = $('#mission-card').height() + $('#launch-pad-card').height();
         if (leftColumnHeight > rightColumnHeight) {
             $('#launch-pad-card').height($('#launch-pad-card').height() + leftColumnHeight - rightColumnHeight + 60);
+            $('#launch-pad-agencies-div').css('padding-bottom', 45);
         }
         else if (rightColumnHeight > leftColumnHeight) {
-            $('#weather-card').height($('#weather-card').height() + rightColumnHeight - leftColumnHeight - 60);
+            var increaseValue = rightColumnHeight - leftColumnHeight - 60;
+            $('#weather-card').height($('#weather-card').height() + increaseValue);
+            $('#weather-div').css('max-height', 450 + increaseValue);
         }
     }, 500);
 });
