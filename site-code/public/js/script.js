@@ -2,6 +2,7 @@
 // create the module and name it app
 var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngMaterial', 'ngMessages']);
 
+// Set Color scheme for buttons and other elements
 app.config(function ($mdThemingProvider) {
     $mdThemingProvider.theme('default')
         .primaryPalette('blue-grey')
@@ -42,6 +43,8 @@ app.controller('Home_Controller', function ($scope, $location, Data_Transfer_Ser
         // this function is called right after the ajax request is complete
         function callback() {
             return function (data, textStatus, jqXHR) {
+                // The $scope variable is used to link variables between here and the HTML DOM. 
+                // "data" variable is returned by ajax request
                 $scope.launches = data.launches;
 
                 for (var i = 0; i < $scope.launches.length; i++) {
@@ -78,7 +81,6 @@ app.controller('Home_Controller', function ($scope, $location, Data_Transfer_Ser
                 // Not sure what this does, but it fixed an issue I was having
                 $scope.$applyAsync();
 
-                // "data" variable is returned by ajax request
 
                 // Get weather data here
                 for (var i = 0; i < $scope.launches.length; i++) {
@@ -89,7 +91,6 @@ app.controller('Home_Controller', function ($scope, $location, Data_Transfer_Ser
 
                     // data.launches[i].weather = ajaxreturn weather object
                 }
-                //setTimeout(generateMaps($scope.launches), 500);
 
                 // use the $scope variable to link variables between here and the HTML
                 // $scope.launches would be accessible inside HTML as the "launches" variable (an array in this example)
@@ -142,6 +143,7 @@ app.controller('Launch_Detail_Controller', function ($scope, Data_Transfer_Servi
     }, 500);
 });
 
+//This service is used to transfer JSON objects between pages.
 app.factory('Data_Transfer_Service', function () {
     var savedData = {}
 
@@ -160,6 +162,7 @@ app.factory('Data_Transfer_Service', function () {
 
 });
 
+// Applies some small CSS animations to the details page when loaded.
 function animateDetailsPage() {
     $('#launch-overview-icon').removeClass("launch-overview-animation");
     $('#launch-overview-icon').addClass("launch-overview-animation");
@@ -177,6 +180,7 @@ function animateDetailsPage() {
     $('#map-icon').addClass("map-animation");
 }
 
+// Creates a Google map object based on a Launch JSON object and places it in a DOM object clarified by the "id" parameter passed
 function createMap(launch, id) {
     var latLong = {
         lat: launch.location.pads[0].latitude,
@@ -195,6 +199,7 @@ function createMap(launch, id) {
     });
 }
 
+// The styles for the Google Map. Not currently in use, but keeping here just in case.
 var googleMapsStyle = [{
         elementType: 'geometry',
         stylers: [{
