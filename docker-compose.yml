@@ -1,0 +1,18 @@
+version: '2'
+
+services:
+  webapp:
+    build: .
+    volumes:
+      - ./site-code:/user/src/app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - rediscache
+    links:
+      - rediscache:redis
+  rediscache:
+    container_name: rediscache
+    image: redis
+    expose:
+      - "6379"
