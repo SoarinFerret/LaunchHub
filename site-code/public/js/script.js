@@ -37,6 +37,8 @@ app.controller('Home_Controller', function ($scope, $location, Data_Transfer_Ser
             async: true,
             type: "GET",
             url: "/api/launch?",
+            contentType: "application/json",
+            dataType: "json",
             success: callback()
         });
 
@@ -182,6 +184,7 @@ function animateDetailsPage() {
 
 // Creates a Google map object based on a Launch JSON object and places it in a DOM object clarified by the "id" parameter passed
 function createMap(launch, id) {
+    if (launch.location == null) return;
     var latLong = {
         lat: launch.location.pads[0].latitude,
         lng: launch.location.pads[0].longitude
