@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install dos2unix -y
 COPY ./site-code /usr/src/app
 
 # Copy Startup file
-COPY ./startup.sh /start.sh
+COPY ./docker_start.sh /start.sh
 
 EXPOSE 8080
 

@@ -7,7 +7,10 @@ const fetch = require("node-fetch");
 
 // Redis Connection
 let client = null;
-client = redis.createClient();
+var host = process.env.REDIS_PORT_6379_TCP_ADDR || '127.0.0.1';
+var port = process.env.REDIS_PORT_6379_TCP_PORT || 6379;
+console.log("Redis connection = " + host + ':' + port);
+var client = redis.createClient(port, host);
 
 // timestamp for API Caching
 var ttlLaunch = Date.now();
@@ -16,7 +19,7 @@ var ttlLaunch = Date.now();
 app.get("/api/launch", (req, resp) => {
     let terms = req.query.name;
     client.get("/api/launch" + terms, (err, result) => {
-        if (result != null && (Date.now() - ttlLaunch) < 30000) {
+        if (result != null && (Date.now() - ttlLaunch) < 300000) {
             console.log("Cache hit for launches");
             resp.send(result);
         } else {
