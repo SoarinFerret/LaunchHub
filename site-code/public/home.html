@@ -30,7 +30,7 @@
                             <h2 class="md-headline" style="margin-top: 5px">{{ launch.name }}</h2>
                             <p>Launch Status: {{ launch.status }}</p>
 							<p>Launch Date &amp; Time: {{ launch.windowend }}</p>
-							<p href="{{ launch.vidURLs }} ">Launch Video: {{ launch.vidURLs }}</p>
+							<p ng-if="launch.vidURLs.length == 1">Launch Video <a target="_blank" href="{{ launch.vidURLs[0] }}">Here</a></p>
 
                             <div layout="column" style="margin-bottom: 55px;" ng-if="launch.missions[0].agencies.length > 0">
                                 <md-divider style="margin-bottom: 15px;"></md-divider>
