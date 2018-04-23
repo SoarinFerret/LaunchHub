@@ -28,7 +28,10 @@
                             <!-- Card Text and Info Here -->
 
                             <h2 class="md-headline" style="margin-top: 5px">{{ launch.name }}</h2>
-                            <p>Launch Date &amp; Time: {{ launch.windowend }}</p>
+                            <p>Launch Name: {{ launch.Name }}</p>
+						    <p>Launch Agency: {{ launch.agencies}} </p>
+							<p>Launch Mission Name: {{launch.missions}} </p>
+							<p>Launch Date &amp; Time: {{ launch.windowend }}</p>
 
                             <div layout="column" style="margin-bottom: 55px;" ng-if="launch.missions[0].agencies.length > 0">
                                 <md-divider style="margin-bottom: 15px;"></md-divider>
