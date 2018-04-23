@@ -10,7 +10,7 @@ To accomplish this project, we are using multiple APIs and technologies to perfo
 Angular provides a number of benefits. Besides being easy to use and implement, it has some awesome features like AngularSPA (single page app), which allows our webapp to flow a bit better.
 
 ### Styling Framework(1): Material Design
- - [Documentation](http://materializecss.com/)
+ - [Documentation](https://material.io/)
 
 A style sheet by Google, it allows for beautifully created web sites following their design language.
 
