@@ -30,13 +30,13 @@
                             <h2 class="md-headline" style="margin-top: 5px">{{ launch.name }}</h2>
                             <p>Launch Date &amp; Time: {{ launch.windowend }}</p>
 
-                            <md-divider style="margin-bottom: 15px;"></md-divider>
-                            <div layout="column" style="margin-bottom: 15px;" ng-if="launch.missions[0].agencies.length > 0">
+                            <div layout="column" style="margin-bottom: 55px;" ng-if="launch.missions[0].agencies.length > 0">
+                                <md-divider style="margin-bottom: 15px;"></md-divider>
                                 <div ng-switch on="launch.missions[0].agencies.length">
                                     <span ng-switch-when="1" class="md-subhead">Mission Agency:</span>
                                     <span ng-switch-default class="md-subhead">Mission Agencies:</span>
                                 </div>
-                                <md-list class="fixedRows" style="margin-bottom: 40px;">
+                                <md-list class="fixedRows">
                                     <md-list-item target="_blank" ng-href="{{ agency.wikiURL }}" class="md-2-line contact-item" ng-repeat="agency in launch.missions[0].agencies">
                                         <img ng-if="agency.countryCode.length > 2" ng-src="https://api.backendless.com/2F26DFBF-433C-51CC-FF56-830CEA93BF00/473FB5A9-D20E-8D3E-FF01-E93D9D780A00/files/CountryFlagsPng/{{ agency.countryCode | lowercase | limitTo: 3 }}.png"
                                             class="md-avatar" alt="{{agency.countryCode}}" />
