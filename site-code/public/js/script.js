@@ -120,7 +120,7 @@ app.controller('About_Controller', function () {
     $(window).scrollTo(0, 200);
 });
 
-app.controller('Launch_Detail_Controller', function ($scope, Data_Transfer_Service, $location) {
+app.controller('Launch_Detail_Controller', function ($scope, Data_Transfer_Service, $location, $http) {
     //$(window).scrollTo(195, 200);
     //Get the launch we stored in the service
     $scope.launch = Data_Transfer_Service.get();
@@ -139,13 +139,16 @@ app.controller('Launch_Detail_Controller', function ($scope, Data_Transfer_Servi
         if (leftColumnHeight > rightColumnHeight) {
             $('#launch-pad-card').height($('#launch-pad-card').height() + leftColumnHeight - rightColumnHeight + 60);
             $('#launch-pad-agencies-div').css('padding-bottom', 45);
-        }
-        else if (rightColumnHeight > leftColumnHeight) {
+        } else if (rightColumnHeight > leftColumnHeight) {
             var increaseValue = rightColumnHeight - leftColumnHeight - 60;
             $('#weather-card').height($('#weather-card').height() + increaseValue);
             $('#weather-div').css('max-height', 450 + increaseValue);
         }
     }, 500);
+
+    $http.get("http://api.openweathermap.org/data/2.5/weather?lat=" + $scope.launch.location.pads[0].latitude + "&lon=" + $scope.launch.location.pads[0].longitude + "&appid=c929e331bf4c9085ccbbabacd4efe680&units=Imperial").then(function(response){
+        $scope.launch.weather = response.data;
+    }).catch(function(err){});
 });
 
 //This service is used to transfer JSON objects between pages.
