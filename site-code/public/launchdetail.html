@@ -39,6 +39,13 @@
                             <i>{{ launch.net }}</i>
                         </span>
                     </div>
+                    <div ng-if="launch.vidURLs.length == 1"  layout="row" style="margin-bottom: 15px;">
+                        <span class="md-subhead">Video</span>
+                        <span style="margin-left: 10px;">-</span>
+                        <span class="md-subhead" style="margin-left: 10px;">
+                            <a target="_blank" href="{{ launch.vidURLs[0] }}">Link</a>
+                        </span>
+                    </div>
                 </md-card>
                 <md-card id="rocket-card" style="background-color: #E4E4E4; min-height: 100px; padding: 20px; margin: 0px; margin-bottom: 20px;">
                     <div layout="row">
