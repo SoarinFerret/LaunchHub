@@ -145,8 +145,8 @@ app.controller('Launch_Detail_Controller', function ($scope, Data_Transfer_Servi
             $('#weather-div').css('max-height', 450 + increaseValue);
         }
     }, 500);
-
-    $http.get("http://api.openweathermap.org/data/2.5/weather?lat=" + $scope.launch.location.pads[0].latitude + "&lon=" + $scope.launch.location.pads[0].longitude + "&appid=c929e331bf4c9085ccbbabacd4efe680&units=Imperial").then(function(response){
+    if ($scope.launch.location == null) return;
+    $http.get("https://api.openweathermap.org/data/2.5/weather?lat=" + $scope.launch.location.pads[0].latitude + "&lon=" + $scope.launch.location.pads[0].longitude + "&appid=c929e331bf4c9085ccbbabacd4efe680&units=Imperial").then(function(response){
         $scope.launch.weather = response.data;
     }).catch(function(err){});
 });
