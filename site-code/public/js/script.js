@@ -117,11 +117,11 @@ app.controller('Home_Controller', function ($scope, $location, Data_Transfer_Ser
 });
 
 app.controller('About_Controller', function () {
-    $(window).scrollTo(0, 200);
+    $(window).scrollTo(195, 200);
 });
 
 app.controller('Launch_Detail_Controller', function ($scope, Data_Transfer_Service, $location, $http) {
-    //$(window).scrollTo(195, 200);
+
     //Get the launch we stored in the service
     $scope.launch = Data_Transfer_Service.get();
     //If the Launch Detail page is navigated to prematurely, redirect to home
