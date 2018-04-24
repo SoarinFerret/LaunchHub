@@ -2,6 +2,7 @@
 // create the module and name it app
 var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngMaterial', 'ngMessages']);
 
+// Set Color scheme for buttons and other elements
 app.config(function ($mdThemingProvider) {
     $mdThemingProvider.theme('default')
         .primaryPalette('blue-grey')
@@ -36,18 +37,22 @@ app.controller('Home_Controller', function ($scope, $location, Data_Transfer_Ser
             async: true,
             type: "GET",
             url: "/api/launch?",
+            contentType: "application/json",
+            dataType: "json",
             success: callback()
         });
 
         // this function is called right after the ajax request is complete
         function callback() {
             return function (data, textStatus, jqXHR) {
+                // The $scope variable is used to link variables between here and the HTML DOM. 
+                // "data" variable is returned by ajax request
                 $scope.launches = data.launches;
 
                 for (var i = 0; i < $scope.launches.length; i++) {
                     var s = $scope.launches[i].name;
                     $scope.launches[i].name = s.substring(s.indexOf('|') + 2).trim();
-                    
+
                     if ($scope.launches[i].rocket.imageURL == null || $scope.launches[i].rocket.imageURL.includes('placeholder')) $scope.launches[i].rocket.imageURL = "";
 
                     if (!($scope.launches[i].missions[0] == null || $scope.launches[i].missions[0].agencies == null)) {
@@ -78,7 +83,6 @@ app.controller('Home_Controller', function ($scope, $location, Data_Transfer_Ser
                 // Not sure what this does, but it fixed an issue I was having
                 $scope.$applyAsync();
 
-                // "data" variable is returned by ajax request
 
                 // Get weather data here
                 for (var i = 0; i < $scope.launches.length; i++) {
@@ -89,7 +93,6 @@ app.controller('Home_Controller', function ($scope, $location, Data_Transfer_Ser
 
                     // data.launches[i].weather = ajaxreturn weather object
                 }
-                //setTimeout(generateMaps($scope.launches), 500);
 
                 // use the $scope variable to link variables between here and the HTML
                 // $scope.launches would be accessible inside HTML as the "launches" variable (an array in this example)
@@ -114,19 +117,41 @@ app.controller('Home_Controller', function ($scope, $location, Data_Transfer_Ser
 });
 
 app.controller('About_Controller', function () {
-    $(window).scrollTo(0, 200);
-});
-
-app.controller('Launch_Detail_Controller', function ($scope, Data_Transfer_Service, $location) {
-    //$(window).scrollTo(195, 200);
-    //Get the launch we stored in the service
-    $scope.launch = Data_Transfer_Service.get();
-    if ($scope.launch.name == null) $location.path('home');
-    createMap($scope.launch, 'detailsMap');
-    animateDetailsPage();
     $(window).scrollTo(195, 200);
 });
 
+app.controller('Launch_Detail_Controller', function ($scope, Data_Transfer_Service, $location, $http) {
+
+    //Get the launch we stored in the service
+    $scope.launch = Data_Transfer_Service.get();
+    //If the Launch Detail page is navigated to prematurely, redirect to home
+    if ($scope.launch.name == null) $location.path('home');
+    //Creates the map element for the details page
+    createMap($scope.launch, 'detailsMap');
+    //CSS animations
+    animateDetailsPage();
+    //Scroll page
+    $(window).scrollTo(195, 200);
+
+    setTimeout(function () {
+        var leftColumnHeight = $('#launch-overview-card').height() + $('#rocket-card').height() + $('#weather-card').height();
+        var rightColumnHeight = $('#mission-card').height() + $('#launch-pad-card').height();
+        if (leftColumnHeight > rightColumnHeight) {
+            $('#launch-pad-card').height($('#launch-pad-card').height() + leftColumnHeight - rightColumnHeight + 60);
+            $('#launch-pad-agencies-div').css('padding-bottom', 45);
+        } else if (rightColumnHeight > leftColumnHeight) {
+            var increaseValue = rightColumnHeight - leftColumnHeight - 60;
+            $('#weather-card').height($('#weather-card').height() + increaseValue);
+            $('#weather-div').css('max-height', 450 + increaseValue);
+        }
+    }, 500);
+    if ($scope.launch.location == null) return;
+    $http.get("https://api.openweathermap.org/data/2.5/weather?lat=" + $scope.launch.location.pads[0].latitude + "&lon=" + $scope.launch.location.pads[0].longitude + "&appid=c929e331bf4c9085ccbbabacd4efe680&units=Imperial").then(function(response){
+        $scope.launch.weather = response.data;
+    }).catch(function(err){});
+});
+
+//This service is used to transfer JSON objects between pages.
 app.factory('Data_Transfer_Service', function () {
     var savedData = {}
 
@@ -145,6 +170,7 @@ app.factory('Data_Transfer_Service', function () {
 
 });
 
+// Applies some small CSS animations to the details page when loaded.
 function animateDetailsPage() {
     $('#launch-overview-icon').removeClass("launch-overview-animation");
     $('#launch-overview-icon').addClass("launch-overview-animation");
@@ -162,15 +188,18 @@ function animateDetailsPage() {
     $('#map-icon').addClass("map-animation");
 }
 
+// Creates a Google map object based on a Launch JSON object and places it in a DOM object clarified by the "id" parameter passed
 function createMap(launch, id) {
+    if (launch.location == null) return;
     var latLong = {
         lat: launch.location.pads[0].latitude,
         lng: launch.location.pads[0].longitude
     };
     var map = new google.maps.Map(document.getElementById(id), {
         center: latLong,
-        zoom: 8,
-        styles: googleMapsStyle
+        zoom: 14,
+        //styles: googleMapsStyle,
+        mapTypeId: google.maps.MapTypeId.HYBRID
     });
     var marker = new google.maps.Marker({
         position: latLong,
@@ -179,6 +208,7 @@ function createMap(launch, id) {
     });
 }
 
+// The styles for the Google Map. Not currently in use, but keeping here just in case.
 var googleMapsStyle = [{
         elementType: 'geometry',
         stylers: [{

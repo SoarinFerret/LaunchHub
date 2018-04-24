@@ -9,14 +9,15 @@
             <div flex></div>
         </div>
         <md-divider style="border-top-color: #E4E4E4; margin-bottom: 15px;"></md-divider>
-        <div id="loader" layout="row" layout-sm="column" layout-align="space-around" style="height: 100%; margin-top: 100px;">
+        <div id="loader" layout="row" layout-align="space-around" style="height: 100%; margin-top: 100px;">
             <md-progress-circular class="md-accent md-hue-2" md-mode="indeterminate"></md-progress-circular>
         </div>
         <!-- End Header -->
         <div>
 
             <!-- Card HTML here -->
-            <md-card style="margin: 0px; margin-bottom: 20px; height: 100%; min-height: 350px; background-color: #E4E4E4; position: relative;" ng-repeat="launch in launches">
+            <md-card style="margin: 0px; margin-bottom: 20px; height: 100%; min-height: 350px; background-color: #E4E4E4; position: relative;"
+                ng-repeat="launch in launches">
                 <div layout="row" flex>
                     <div flex="50">
                         <div id="map{{ $index }}" style="width: 100%; height: 100%;"></div>
@@ -27,14 +28,34 @@
                             <!-- Card Text and Info Here -->
 
                             <h2 class="md-headline" style="margin-top: 5px">{{ launch.name }}</h2>
-                            <p>launch date &amp; time here</p>
-                            
+                            <p>Launch Status: {{ launch.status }}</p>
+							<p>Launch Date &amp; Time: {{ launch.windowend }}</p>
+							<p ng-if="launch.vidURLs.length == 1">Launch Live Stream <a target="_blank" href="{{ launch.vidURLs[0] }}">Here</a></p>
+
+                            <div layout="column" style="margin-bottom: 55px;" ng-if="launch.missions[0].agencies.length > 0">
+                                <md-divider style="margin-bottom: 15px;"></md-divider>
+                                <div ng-switch on="launch.missions[0].agencies.length">
+                                    <span ng-switch-when="1" class="md-subhead">Mission Agency:</span>
+                                    <span ng-switch-default class="md-subhead">Mission Agencies:</span>
+                                </div>
+                                <md-list class="fixedRows">
+                                    <md-list-item target="_blank" ng-href="{{ agency.wikiURL }}" class="md-2-line contact-item" ng-repeat="agency in launch.missions[0].agencies">
+                                        <img ng-if="agency.countryCode.length > 2" ng-src="https://api.backendless.com/2F26DFBF-433C-51CC-FF56-830CEA93BF00/473FB5A9-D20E-8D3E-FF01-E93D9D780A00/files/CountryFlagsPng/{{ agency.countryCode | lowercase | limitTo: 3 }}.png"
+                                            class="md-avatar" alt="{{agency.countryCode}}" />
+                                        <div class="md-list-item-text compact">
+                                            <h3>{{agency.name}}</h3>
+                                            <p>{{agency.countryCode}}</p>
+                                        </div>
+                                    </md-list-item>
+                                </md-list>
+                            </div>
+                            <md-button ng-click="ViewDetails(launch)" style="padding-left: 15px; padding-right: 15px; position: absolute; bottom: 10px; right: 10px;"
+                                class="md-raised md-accent md-hue-2">
+                                <span style="font-size: 16px;">View Details</span>
+                            </md-button>
                             <!-- End Card Text and Info -->
 
                         </md-card-content>
-                        <md-button ng-click="ViewDetails(launch)" style="padding-left: 15px; padding-right: 15px; position: absolute; bottom: 10px; right: 10px;" class="md-raised md-accent md-hue-2">
-                            <span style="font-size: 16px;">View Details</span>
-                        </md-button>
                     </div>
                 </div>
             </md-card>

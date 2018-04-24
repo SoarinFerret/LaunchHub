@@ -11,7 +11,7 @@
 
         <div layout="row">
             <div flex="50" layout="column" style="margin-right: 10px;">
-                <md-card style="background-color: #E4E4E4; min-height: 100px; padding: 20px; margin: 0px; margin-bottom: 20px;">
+                <md-card id="launch-overview-card" style="background-color: #E4E4E4; min-height: 100px; padding: 20px; margin: 0px; margin-bottom: 20px;">
                     <div layout="row">
                         <h2 class="md-headline" style="margin-top: 0px;">
                             <md-icon id="launch-overview-icon" md-font-set="material-icons" style="color: #000; font-size: 28px; margin-bottom: 8px; margin-right: 10px;">
@@ -39,13 +39,21 @@
                             <i>{{ launch.net }}</i>
                         </span>
                     </div>
+                    <div ng-if="launch.vidURLs.length == 1"  layout="row" style="margin-bottom: 15px;">
+                        <span class="md-subhead">Live Stream</span>
+                        <span style="margin-left: 10px;">-</span>
+                        <span class="md-subhead" style="margin-left: 10px;">
+                            <a target="_blank" href="{{ launch.vidURLs[0] }}">Link</a>
+                        </span>
+                    </div>
                 </md-card>
-                <md-card style="background-color: #E4E4E4; min-height: 100px; padding: 20px; margin: 0px; margin-bottom: 20px;">
+                <md-card id="rocket-card" style="background-color: #E4E4E4; min-height: 100px; padding: 20px; margin: 0px; margin-bottom: 20px;">
                     <div layout="row">
                         <h2 class="md-headline" style="margin-top: 0px;">
                             <md-icon id="launch-overview-icon" md-font-set="material-icons" style="color: #000; font-size: 28px; margin-bottom: 8px; margin-right: 10px;">
                                 change_history</md-icon>Rocket</h2>
                         <div flex></div>
+                        <md-button ng-if="launch.rocket.wikiURL.length > 0" ng-href="{{ launch.rocket.wikiURL }}" style="height: 30px; margin: 0px;" class="md-accent md-hue-3" target="_blank">More Info</md-button>
                     </div>
                     <div layout="row" style="margin-bottom: 15px;">
                         <span class="md-subhead">Name</span>
@@ -82,22 +90,25 @@
                         <img style="width: auto; max-height: 400px;" ng-src="{{launch.rocket.imageURL}}">
                     </div>
                 </md-card>
-                <md-card style="background-color: #E4E4E4; min-height: 100px; padding: 20px; margin: 0px; margin-bottom: 20px;">
+                <md-card id="weather-card" style="background-color: #E4E4E4; min-height: 100px; padding: 20px; margin: 0px; margin-bottom: 20px;">
                     <div layout="row">
                         <h2 class="md-headline" style="margin-top: 0px;">
                             <md-icon id="weather-icon" md-font-set="material-icons" style="color: #000; font-size: 28px; margin-bottom: 8px; margin-right: 10px;">
                                 wb_sunny </md-icon>Weather</h2>
                         <div flex></div>
                     </div>
+                    <div>
+                        <div id="weather-div" style="max-height: 450px; height: 100%; overflow: auto;">Temperature: {{ launch.weather.main.temp }}&deg;F</div>
+                    </div>
                 </md-card>
             </div>
             <div flex="50" layout="column" style="margin-left: 10px;">
-                <md-card style="background-color: #E4E4E4; min-height: 100px; padding: 20px; margin: 0px; margin-bottom: 20px;">
+                <md-card id="mission-card" style="background-color: #E4E4E4; min-height: 100px; padding: 20px; margin: 0px; margin-bottom: 20px;">
                     <div layout="row">
                         <h2 class="md-headline" style="margin-top: 0px;">
                             <md-icon id="mission-icon" md-font-set="material-icons" style="color: #000; font-size: 28px; margin-bottom: 8px; width: 28px; height: 28px;">
                                 explore </md-icon>
-                            <span style="margin-left: 10px;">Mission</span>
+                            <span>Mission</span>
                         </h2>
                         <div flex></div>
                     </div>
@@ -136,12 +147,13 @@
                         </div>
                     </div>
                 </md-card>
-                <md-card style="background-color: #E4E4E4; min-height: 100px; padding: 20px; margin: 0px; margin-bottom: 20px;">
+                <md-card id="launch-pad-card" style="background-color: #E4E4E4; min-height: 100px; padding: 20px; margin: 0px; margin-bottom: 20px;">
                     <div layout="row">
                         <h2 class="md-headline" style="margin-top: 0px;">
                             <md-icon id="launch-pad-icon" md-font-set="material-icons" style="color: #000; font-size: 28px; margin-bottom: 8px; margin-right: 10px;">
                                 flight_takeoff </md-icon>Launch Pad</h2>
                         <div flex></div>
+                        <md-button ng-if="launch.location.pads[0].wikiURL.length > 0" ng-href="{{ launch.location.pads[0].wikiURL }}" style="height: 30px; margin: 0px;" class="md-accent md-hue-3" target="_blank">More Info</md-button>
                     </div>
                     <div layout="row" style="margin-bottom: 15px;">
                         <span class="md-subhead">Name</span>
@@ -157,7 +169,7 @@
                             <i>{{ launch.location.name }}</i>
                         </span>
                     </div>
-                    <div layout="column" style="margin-bottom: 15px;" ng-if="launch.location.pads[0].agencies.length > 0">
+                    <div id="launch-pad-agencies-div" layout="column" style="margin-bottom: 15px;" ng-if="launch.location.pads[0].agencies.length > 0">
                         <div ng-switch on="launch.location.pads[0].agencies.length">
                             <span ng-switch-when="1" class="md-subhead">Agency:</span>
                             <span ng-switch-default class="md-subhead">Agencies:</span>
@@ -178,7 +190,7 @@
                         <div flex></div>
                         <span class="md-subhead" style="margin-bottom: 10px; color: #A4A4A4">Lat: {{ launch.location.pads[0].latitude }} | Long: {{ launch.location.pads[0].longitude }}</span>
                     </div>
-                    <div style="width: 100%; height: 500px;" id="detailsMap"></div>
+                    <div style="width: 100%; min-height: 500px; height: 100%;" id="detailsMap"></div>
                 </md-card>
             </div>
         </div>
