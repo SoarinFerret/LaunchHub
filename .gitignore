@@ -57,6 +57,9 @@ typings/
 # dotenv environment variables file
 .env
 
+# Directory with env files
+.docker/
+
 # Stuff I added
 *.code-workspace
 codytest.js
