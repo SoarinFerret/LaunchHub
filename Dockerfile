@@ -1,7 +1,8 @@
-FROM node:carbon
+FROM node:carbon-alpine
 
 # Install programs as necessary
-RUN apt-get update > /dev/null 2>&1 && apt-get install dos2unix -y > /dev/null 2>&1
+RUN apk update > /dev/null && apk add bash > /dev/null && \
+    apk add dos2unix --update-cache --repository http://dl-3.alpinelinux.org/alpine/edge/community/ --allow-untrusted > /dev/null
 
 # Copy Startup file
 COPY ./docker_start.sh /start.sh
