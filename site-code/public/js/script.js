@@ -107,12 +107,13 @@ function ajaxRequest($scope, $location, Data_Transfer_Service, future) {
             // $scope.launches would be accessible inside HTML as the "launches" variable (an array in this example)
 
             // Fades out the progress ring that appears when loading the page
-            $('#loader').fadeOut(300, function () {
+            angular.element(document).ready(function () {
                 for (var i = 0; i < $scope.launches.length; i++) {
                     createMap($scope.launches[i], 'map' + i);
                 }
-                $('#footer').fadeIn();
+                $('#loader').fadeOut(1000);
             });
+            $('#footer').fadeIn();
 
             // This function is called when a "View Details" button is pressed, the launch JSON object is passed as parameter
             $scope.ViewDetails = function (launch) {
@@ -242,7 +243,7 @@ app.controller('Launch_Detail_Controller', function ($scope, Data_Transfer_Servi
         $scope.launch.weather.currently.localTime = new Date($scope.launch.weather.currently.time * 1000);
 
         var daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-        for(var i = 0; i < $scope.launch.weather.daily.data.length; i++)  {
+        for (var i = 0; i < $scope.launch.weather.daily.data.length; i++) {
             $scope.launch.weather.daily.data[i].timeObject = new Date($scope.launch.weather.daily.data[i].time * 1000);
             $scope.launch.weather.daily.data[i].dayOfWeek = daysOfWeek[$scope.launch.weather.daily.data[i].timeObject.getDay()];
             if ($scope.launch.weather.daily.data[i].timeObject.getDate() == new Date().getDate()) {
