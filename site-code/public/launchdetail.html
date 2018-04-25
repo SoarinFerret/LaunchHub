@@ -127,7 +127,7 @@
                                     <div layout="row">
                                         <div layout="column" style="width: -webkit-fill-available; height: 50px;">
                                             <h4 class="md-subhead">CHANCE OF RAIN</h4>
-                                            <h4 class="md-title">{{ launch.weather.currently.precipProbability }}%</h3>
+                                            <h4 class="md-title">{{ launch.weather.currently.precipProbability * 100 | number : 0}}%</h3>
                                         </div>
                                         <div style="width: 20px;"></div>
                                         <div layout="column" style="width: -webkit-fill-available; height: 50px;">
