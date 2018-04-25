@@ -132,7 +132,7 @@
                                         <div style="width: 20px;"></div>
                                         <div layout="column" style="width: -webkit-fill-available; height: 50px;">
                                             <h4 class="md-subhead">HUMIDITY</h4>
-                                            <h4 class="md-title">{{ launch.weather.currently.humidity * 100 }}%</h3>
+                                            <h4 class="md-title">{{ launch.weather.currently.humidity * 100 | number : 0 }}%</h3>
                                         </div>
                                     </div>
                                     <md-divider></md-divider>
@@ -157,7 +157,7 @@
                                         <div style="width: 20px;"></div>
                                         <div layout="column" style="width: -webkit-fill-available; height: 50px;">
                                             <h4 class="md-subhead">CLOUD COVER</h4>
-                                            <h4 class="md-title">{{ launch.weather.currently.cloudCover * 100 }}%</h3>
+                                            <h4 class="md-title">{{ launch.weather.currently.cloudCover * 100 | number : 0 }}%</h3>
                                         </div>
                                     </div>
                                     <md-divider></md-divider>
