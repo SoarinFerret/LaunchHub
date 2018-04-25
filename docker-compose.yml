@@ -15,6 +15,6 @@ services:
       - ./.docker/webapp.env
   rediscache:
     container_name: rediscache
-    image: redis
+    image: redis:alpine
     expose:
       - "6379"

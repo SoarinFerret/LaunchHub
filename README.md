@@ -11,7 +11,7 @@ Serving as the core API of our application, we are pulling information about lau
 ## backendless Country Flag API
   - [Documentation](https://backendless.com/)
 
-This is used to pull flag data for different Space Agency affiliations.
+This is used to pull flag data for different agency affiliations.
 
 ## Google Maps API
   - [Documentation](https://developers.google.com/maps/)
@@ -88,4 +88,28 @@ $ cd $PROJECTSOURCE
 $ docker build -t webapp .
 $ docker run -d --publish=6379 --name="rediscache" redis
 $ docker run -d -p 8080:8080 -v $PROJECTSOURCE/site-code:/usr/src/app --link="rediscache:rediscache" --env-file=".docker/webapp.env" webapp
+```
+# Common Errors & Fixes
+## No Such File or Directory
+```
+webapp_1      | standard_init_linux.go:190: exec user process caused "no such file or directory"
+```
+Your docker_start.sh is somehow invalid. Most likely, it is using Windows line endings instead of Unix. Easiest way to fix if you have dos2unix installed is to run:
+```
+$ dos2unix docker_start.sh
+```
+## Need to Reset Redis Cache
+```
+$ docker rm rediscache -f
+$ docker-compose up
+```
+## Changes to docker_start.sh not working
+This is because the docker build process caches each step. To ensure a clean build, use:
+```
+$ docker-compose build --no-cache
+```
+## Any other weird docker issues
+This will essentially nuke anything stored on your docker instance:
+```
+$ docker system prune -a
 ```
