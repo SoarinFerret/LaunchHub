@@ -35,6 +35,7 @@ app.config(function ($routeProvider) {
 });
 
 app.controller('Upcoming_Controller', function ($scope, $location, Data_Transfer_Service) {
+    if (Cookies.get('previouslyVisited') == 'true') $('#welcomeCard').hide();
     $('#footer').hide();
     $(window).scrollTo(0, 200);
     $(document).ready(setTimeout(function () {
@@ -51,7 +52,7 @@ app.controller('Recent_Controller', function ($scope, $location, Data_Transfer_S
 });
 
 function ajaxRequest($scope, $location, Data_Transfer_Service, future) {
-    var url = (future ? "futurelaunches" : "pastlaunches" );
+    var url = (future ? "futurelaunches" : "pastlaunches");
     $.ajax({
         async: true,
         type: "GET",
@@ -124,8 +125,68 @@ function ajaxRequest($scope, $location, Data_Transfer_Service, future) {
     }
 }
 
-app.controller('About_Controller', function () {
+app.controller('About_Controller', function ($scope) {
     $(window).scrollTo(195, 200);
+
+    $scope.title = "LaunchHub";
+    $scope.description = "LaunchHub is a centralized source to receive information on future rocket launches all around the world, aggregating location and weather data for each.";
+
+    $scope.apis = [];
+    $scope.apis.push({
+        name: "Launch Library API",
+        link: "http://launchlibrary.net/docs/1.4/api.html",
+        description: "Serving as the core API of our application, we are pulling information about launches all over the world."
+    }, {
+        name: "backendless Country Flag API",
+        link: "https://backendless.com/",
+        description: "This is used to pull flag data for different agency affiliations."
+    }, {
+        name: "Google Maps API",
+        link: "https://developers.google.com/maps/",
+        description: "Using longitude and latitude provided by Launch Library, we are showing satellite view of the surrounding area."
+    }, {
+        name: "DarkSky API",
+        link: "https://darksky.net/dev/docs",
+        description: "Again, using longitude and latitude provided by Launch Library, we are providing current weather information about the site. This API has a strict limit of 1000 calls per day for free accounts, so our caching using redis is quite useful."
+    });
+
+    $scope.technologies = [];
+    $scope.technologies.push({
+        type: "Front-end Language",
+        name: "Angular 5",
+        link: "https://angular.io/docs",
+        description: "Angular provides a number of benefits. Besides being easy to use and implement, it has some awesome features like AngularSPA (single page app), which allows our webapp to flow a bit better."
+    }, {
+        type: "Styling Framework(1)",
+        name: "Material Design",
+        link: "https://material.io/",
+        description: "A style sheet by Google, it allows for beautifully created web sites following their design language."
+    }, {
+        type: "Styling Framework(2)",
+        name: "Angular Material",
+        link: "https://material.angularjs.org/",
+        description: "A slightly less involved and easier to use version of Google's Material Design style sheet."
+    }, {
+        type: "Server-side Language",
+        name: "Node.js",
+        link: "https://nodejs.org/en/docs/",
+        description: "Node.js has the benefit of just being easy to use JavaScript, without the extra bloat needed with Django. Plus, Django just has a lot of nice, but unnecessary functionality for this specific application."
+    }, {
+        type: "Webserver",
+        name: "Nginx",
+        link: "https://docs.nginx.com/",
+        description: "Node.js has the benefit of just being easy to use JavaScript, without the extra bloat needed with Django. Plus, Django just has a lot of nice, but unnecessary functionality for this specific application."
+    }, {
+        type: "Backend Datastore",
+        name: "Redis",
+        link: "https://redis.io/documentation",
+        description: "Recommended by many all over, redis is being used as a caching componet so we don't have to constantly hit the APIs we are querying."
+    }, {
+        type: "Deployment Technology",
+        name: "Docker Compose",
+        link: "https://docs.docker.com/compose/",
+        description: "What now seems to be the defacto deployment method, docker-compose allows us to build scalable, cross-platform, and easily replicated environments for both production and development purposes."
+    })
 });
 
 app.controller('Launch_Detail_Controller', function ($scope, Data_Transfer_Service, $location, $http) {
@@ -189,7 +250,6 @@ app.controller('Launch_Detail_Controller', function ($scope, Data_Transfer_Servi
 
         $scope.launch.weather.timezone = $scope.launch.weather.timezone.substring($scope.launch.weather.timezone.indexOf('/') + 1).replace("_", " ");
 
-        console.log($scope.launch.weather);
 
         $scope.$applyAsync();
     }).catch(function (err) {});
@@ -242,7 +302,6 @@ function createMap(launch, id) {
     var map = new google.maps.Map(document.getElementById(id), {
         center: latLong,
         zoom: 14,
-        //styles: googleMapsStyle,
         mapTypeId: google.maps.MapTypeId.HYBRID
     });
     var marker = new google.maps.Marker({
@@ -251,129 +310,3 @@ function createMap(launch, id) {
         title: launch.location.pads[0].name
     });
 }
-
-// The styles for the Google Map. Not currently in use, but keeping here just in case.
-var googleMapsStyle = [{
-        elementType: 'geometry',
-        stylers: [{
-            color: '#D4D4D4'
-        }]
-    },
-    {
-        elementType: 'labels.text.stroke',
-        stylers: [{
-            color: '#D4D4D4'
-        }]
-    },
-    {
-        elementType: 'labels.text.fill',
-        stylers: [{
-            color: '#746855'
-        }]
-    },
-    {
-        featureType: 'administrative.locality',
-        elementType: 'labels.text.fill',
-        stylers: [{
-            color: '#b54d00'
-        }]
-    },
-    {
-        featureType: 'poi',
-        elementType: 'labels.text.fill',
-        stylers: [{
-            color: '#b54d00'
-        }]
-    },
-    {
-        featureType: 'poi.park',
-        elementType: 'geometry',
-        stylers: [{
-            color: '#5d6d60'
-        }]
-    },
-    {
-        featureType: 'poi.park',
-        elementType: 'labels.text.fill',
-        stylers: [{
-            color: '#2c4c33'
-        }]
-    },
-    {
-        featureType: 'road',
-        elementType: 'geometry',
-        stylers: [{
-            color: '#8f8f99'
-        }]
-    },
-    {
-        featureType: 'road',
-        elementType: 'geometry.stroke',
-        stylers: [{
-            color: '#212a37'
-        }]
-    },
-    {
-        featureType: 'road',
-        elementType: 'labels.text.fill',
-        stylers: [{
-            color: '#9ca5b3'
-        }]
-    },
-    {
-        featureType: 'road.highway',
-        elementType: 'geometry',
-        stylers: [{
-            color: '#7b7b82'
-        }]
-    },
-    {
-        featureType: 'road.highway',
-        elementType: 'geometry.stroke',
-        stylers: [{
-            color: '#1f2835'
-        }]
-    },
-    {
-        featureType: 'road.highway',
-        elementType: 'labels.text.fill',
-        stylers: [{
-            color: '#f3d19c'
-        }]
-    },
-    {
-        featureType: 'transit',
-        elementType: 'geometry',
-        stylers: [{
-            color: '#2f3948'
-        }]
-    },
-    {
-        featureType: 'transit.station',
-        elementType: 'labels.text.fill',
-        stylers: [{
-            color: '#d59563'
-        }]
-    },
-    {
-        featureType: 'water',
-        elementType: 'geometry',
-        stylers: [{
-            color: '#22333d'
-        }]
-    },
-    {
-        featureType: 'water',
-        elementType: 'labels.text.fill',
-        stylers: [{
-            color: '#515c6d'
-        }]
-    },
-    {
-        featureType: 'water',
-        elementType: 'labels.text.stroke',
-        stylers: [{
-            color: '#17263c'
-        }]
-    }
-];
