@@ -35,6 +35,7 @@ app.config(function ($routeProvider) {
 });
 
 app.controller('Upcoming_Controller', function ($scope, $location, Data_Transfer_Service) {
+    $('#footer').hide();
     $(window).scrollTo(0, 200);
     $(document).ready(setTimeout(function () {
         ajaxRequest($scope, $location, Data_Transfer_Service, true);
@@ -42,6 +43,7 @@ app.controller('Upcoming_Controller', function ($scope, $location, Data_Transfer
 });
 
 app.controller('Recent_Controller', function ($scope, $location, Data_Transfer_Service) {
+    $('#footer').hide();
     $(window).scrollTo(0, 200);
     $(document).ready(setTimeout(function () {
         ajaxRequest($scope, $location, Data_Transfer_Service, false);
@@ -108,6 +110,7 @@ function ajaxRequest($scope, $location, Data_Transfer_Service, future) {
                 for (var i = 0; i < $scope.launches.length; i++) {
                     createMap($scope.launches[i], 'map' + i);
                 }
+                $('#footer').fadeIn();
             });
 
             // This function is called when a "View Details" button is pressed, the launch JSON object is passed as parameter
@@ -126,7 +129,6 @@ app.controller('About_Controller', function () {
 });
 
 app.controller('Launch_Detail_Controller', function ($scope, Data_Transfer_Service, $location, $http) {
-
     //Get the launch we stored in the service
     $scope.launch = Data_Transfer_Service.get();
     //If the Launch Detail page is navigated to prematurely, redirect to home
@@ -147,7 +149,6 @@ app.controller('Launch_Detail_Controller', function ($scope, Data_Transfer_Servi
         } else if (rightColumnHeight > leftColumnHeight) {
             var increaseValue = rightColumnHeight - leftColumnHeight - 93;
             $('#weather-div').height($('#weather-card').height() + increaseValue);
-            $('#weather-div').css('max-height', 450 + increaseValue);
         }
     }, 500);
     if ($scope.launch.location == null) return;
@@ -181,7 +182,7 @@ app.controller('Launch_Detail_Controller', function ($scope, Data_Transfer_Servi
         var foreignTimeObject = new Date(0);
         localTimeObject.setUTCSeconds($scope.launch.weather.currently.time);
         foreignTimeObject.setUTCSeconds($scope.launch.weather.currently.time);
-        foreignTimeObject.setHours(foreignTimeObject.getHours() + $scope.launch.weather.offset);
+        foreignTimeObject.setUTCHours(foreignTimeObject.getUTCHours() + $scope.launch.weather.offset);
 
         $scope.launch.weather.currently.localTimeString = localTimeObject.toLocaleString();
         $scope.launch.weather.currently.foreignTimeString = foreignTimeObject.toLocaleString();
