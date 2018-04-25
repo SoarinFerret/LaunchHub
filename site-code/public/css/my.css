@@ -1,3 +1,8 @@
+a {
+	color: #3da4ff;
+	text-decoration: none;
+}
+
 .ng-leave {
 	animation: scaleOut 0.2s both ease-in-out;
 }
