@@ -11,7 +11,7 @@ services:
       - rediscache
     links:
       - rediscache:redis
-      env_file:
+    env_file:
       - ./.docker/webapp.env
   rediscache:
     container_name: rediscache
