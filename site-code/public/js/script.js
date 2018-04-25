@@ -239,17 +239,18 @@ app.controller('Launch_Detail_Controller', function ($scope, Data_Transfer_Servi
             if (wb > 348.75) wd = "N";
             $scope.launch.weather.currently.windDirection = wd;
         }
-        var localTimeObject = new Date(0);
-        var foreignTimeObject = new Date(0);
-        localTimeObject.setUTCSeconds($scope.launch.weather.currently.time);
-        foreignTimeObject.setUTCSeconds($scope.launch.weather.currently.time);
-        foreignTimeObject.setUTCHours(foreignTimeObject.getUTCHours() + $scope.launch.weather.offset);
+        $scope.launch.weather.currently.localTime = new Date($scope.launch.weather.currently.time * 1000);
 
-        $scope.launch.weather.currently.localTimeString = localTimeObject.toLocaleString();
-        $scope.launch.weather.currently.foreignTimeString = foreignTimeObject.toLocaleString();
-
-        $scope.launch.weather.timezone = $scope.launch.weather.timezone.substring($scope.launch.weather.timezone.indexOf('/') + 1).replace("_", " ");
-
+        var daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        for(var i = 0; i < $scope.launch.weather.daily.data.length; i++)  {
+            $scope.launch.weather.daily.data[i].timeObject = new Date($scope.launch.weather.daily.data[i].time * 1000);
+            $scope.launch.weather.daily.data[i].dayOfWeek = daysOfWeek[$scope.launch.weather.daily.data[i].timeObject.getDay()];
+            if ($scope.launch.weather.daily.data[i].timeObject.getDate() == new Date().getDate()) {
+                $scope.launch.weather.daily.data.shift();
+                i--;
+            }
+        }
+        console.log($scope.launch.weather.daily.data);
 
         $scope.$applyAsync();
     }).catch(function (err) {});

@@ -99,10 +99,7 @@
                             <md-icon id="weather-icon" md-font-set="material-icons" style="color: #000; font-size: 28px; margin-bottom: 8px; margin-right: 10px;">
                                 wb_sunny </md-icon>Weather</h2>
                         <div flex></div>
-                        <div layout="column">
-                                <span class="md-subhead" style="color: #A4A4A4">Retrieved at {{ launch.weather.currently.localTimeString }}</span>
-                                <span style="text-align: right; color: #A4A4A4; font-size: 13px;">{{ launch.weather.currently.foreignTimeString }} in {{ launch.weather.timezone }}</span>
-                        </div>
+                        <span class="md-subhead" style="color: #A4A4A4; margin-top: 5px;">Retrieved at {{ launch.weather.currently.localTime.toLocaleString() }}</span>
                     </div>
                     <div>
                         <div id="weather-div" style="background-size: cover; height: 100%; color: white; text-shadow: 1px 2px 5px black;">
@@ -158,6 +155,21 @@
                                         <div layout="column" style="width: -webkit-fill-available; height: 50px;">
                                             <h4 class="md-subhead">CLOUD COVER</h4>
                                             <h4 class="md-title">{{ launch.weather.currently.cloudCover * 100 | number : 0 }}%</h3>
+                                        </div>
+                                    </div>
+                                    <md-divider></md-divider>
+                                    <div style="height: 170px; overflow: auto;" layout="row">
+                                        <div ng-repeat="day in launch.weather.daily.data" layout="row">
+                                            <md-tooltip md-direction="top">{{ day.summary }}</md-tooltip>
+                                            <div style="min-width: 140px;" layout="column">
+                                                <span class="md-title">{{ day.dayOfWeek }}</span>
+                                                <span>{{ day.timeObject.getMonth() + 1 }}/{{ day.timeObject.getDate() }}/{{ day.timeObject.getFullYear() }}</span>
+                                                <br>
+                                                <span>High: {{ day.temperatureHigh | number : 0 }}&deg;F</span>
+                                                <span>Low: {{ day.temperatureLow | number : 0 }}&deg;F</span>
+                                                <span>Rain Chance: {{ day.precipProbability * 100 | number : 0 }}%</span>
+                                            </div>
+                                            <div ng-if="!$last" style="border-right: 1px solid #C4C4C4; height: 90%;"></div>
                                         </div>
                                     </div>
                                     <md-divider></md-divider>
