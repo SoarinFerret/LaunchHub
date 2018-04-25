@@ -16,5 +16,5 @@ npm install > /dev/null
 echo -e "...${GREEN}done${NC}!\n"
 
 # Start the webserver
-echo "${GREEN}Starting the Webserver!${NC}"
+echo -e "${GREEN}Starting the Webserver!${NC}"
 npm start
