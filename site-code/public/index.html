@@ -62,28 +62,6 @@
             </section>
         </div>
     </header>
-    <script>
-        $('.underline-on-hover').hover(function () {
-            $(this).css({
-                'text-decoration': 'underline'
-            });
-        }, function () {
-            $(this).css({
-                'text-decoration': 'none'
-            });
-        });
-        $('.scroll-top').click(function () {
-            $(window).scrollTo(0, 200);
-        });
-        var toolbar = mdc.toolbar.MDCToolbar.attachTo(document.querySelector('.mdc-toolbar'));
-        toolbar.fixedAdjustElement = document.querySelector('.mdc-toolbar-fixed-adjust');
-        var menuEl = document.querySelector('#menu');
-        var menu = new mdc.menu.MDCMenu(menuEl);
-        var toggle = document.querySelector('#menuButton');
-        toggle.addEventListener('click', function () {
-            menu.open = !menu.open;
-        });
-    </script>
     <!-- MAIN CONTENT AND INJECTED VIEWS -->
     <main id="main" class="mdc-toolbar-fixed-adjust mdc-theme--background" style="margin-top: 256px">
 
@@ -96,9 +74,8 @@
             <div style="width: 90%; max-width: 30%;">
                 <md-divider style="border-top-color: #E4E4E4; margin-bottom: 15px;"></md-divider>
                 <div layout="row">
-                    <div flex></div>                    
-                    <h4 id="footer" class="md-hue-1" style="color: gray; margin-top: 0%;">Copyright &copy; 2018 -&nbsp;</h4>
-                    <a  href="#!/about"><h4 id="ftAbout" class="md-hue-3" style="margin-right: 0px; color: gray; margin-top: 0%;">About Us</h4></a>
+                    <div flex></div>
+                    <span class="" style="color: #AAAAAA; margin-top: 0%;">Copyright &copy; 2018 -&nbsp;<a href="#!/about" class="underline-on-hover" style="color: #AAAAAA;">About Us</a></span>
                     <div flex></div>                    
                 </div>
             </div>
@@ -106,4 +83,26 @@
         </div> 
     </footer>
 </body>
+<script>
+    $('.underline-on-hover').hover(function () {
+        $(this).css({
+            'text-decoration': 'underline'
+        });
+    }, function () {
+        $(this).css({
+            'text-decoration': 'none'
+        });
+    });
+    $('.scroll-top').click(function () {
+        $(window).scrollTo(0, 200);
+    });
+    var toolbar = mdc.toolbar.MDCToolbar.attachTo(document.querySelector('.mdc-toolbar'));
+    toolbar.fixedAdjustElement = document.querySelector('.mdc-toolbar-fixed-adjust');
+    var menuEl = document.querySelector('#menu');
+    var menu = new mdc.menu.MDCMenu(menuEl);
+    var toggle = document.querySelector('#menuButton');
+    toggle.addEventListener('click', function () {
+        menu.open = !menu.open;
+    });
+</script>
 </html>
