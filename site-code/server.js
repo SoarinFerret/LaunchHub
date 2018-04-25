@@ -6,13 +6,13 @@ const redis = require("redis");
 const fetch = require("node-fetch");
 
 // Define API Keys
-const weatherApiKey = process.env.WEATHERAPIKEY
+const weatherApiKey = process.env.WEATHERAPIKEY;
 
 // Redis Connection Setup
 let client = null;
 var host = 'rediscache';
 var port = 6379;
-console.log("Redis connection = " + host + ':' + port);
+console.log("Creating redis connection at " + host + ':' + port);
 client = redis.createClient(port, host);
 
 // Time to live for launch and Weather APIs
