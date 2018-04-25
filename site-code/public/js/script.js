@@ -36,7 +36,7 @@ app.controller('Home_Controller', function ($scope, $location, Data_Transfer_Ser
         $.ajax({
             async: true,
             type: "GET",
-            url: "/api/launch?",
+            url: "/api/futurelaunches",
             contentType: "application/json",
             dataType: "json",
             success: callback()
