@@ -69,6 +69,7 @@ function ajaxRequest($scope, $location, Data_Transfer_Service, future) {
             // "data" variable is returned by ajax request
             $scope.launches = data.launches;
 
+            //for (var i = $scope.launches.length-1; i > -1; i--) {
             for (var i = 0; i < $scope.launches.length; i++) {
                 var s = $scope.launches[i].name;
                 $scope.launches[i].name = s.substring(s.indexOf('|') + 2).trim();
@@ -312,3 +313,10 @@ function createMap(launch, id) {
         title: launch.location.pads[0].name
     });
 }
+
+// Reverse order of Recent Launches
+app.filter('reverse', function() {
+    return function(items) {
+        return items.slice().reverse();
+    };
+});
