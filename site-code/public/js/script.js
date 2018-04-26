@@ -111,7 +111,7 @@ function ajaxRequest($scope, $location, Data_Transfer_Service, future) {
                 for (var i = 0; i < $scope.launches.length; i++) {
                     createMap($scope.launches[i], 'map' + i);
                 }
-                $('#loader').fadeOut(1000);
+                $('#loader').fadeOut(300);
             });
             $('#footer').fadeIn();
 
@@ -197,12 +197,10 @@ app.controller('Launch_Detail_Controller', function ($scope, Data_Transfer_Servi
     if ($scope.launch.name == null) $location.path('home');
     //Creates the map element for the details page
     createMap($scope.launch, 'detailsMap');
-    //CSS animations
-    animateDetailsPage();
     //Scroll page
     $(window).scrollTo(195, 200);
 
-    setTimeout(function () {
+    angular.element(document).ready(setTimeout(function() {
         var leftColumnHeight = $('#launch-overview-card').height() + $('#rocket-card').height() + $('#weather-card').height();
         var rightColumnHeight = $('#mission-card').height() + $('#launch-pad-card').height();
         if (leftColumnHeight > rightColumnHeight) {
@@ -212,7 +210,7 @@ app.controller('Launch_Detail_Controller', function ($scope, Data_Transfer_Servi
             var increaseValue = rightColumnHeight - leftColumnHeight - 93;
             $('#weather-div').height($('#weather-card').height() + increaseValue);
         }
-    }, 500);
+    }, 50));
     if ($scope.launch.location == null) return;
     $http.get("/api/weather?loc=" + $scope.launch.location.pads[0].latitude + "," + $scope.launch.location.pads[0].longitude).then(function (response) {
 
@@ -275,24 +273,6 @@ app.factory('Data_Transfer_Service', function () {
     }
 
 });
-
-// Applies some small CSS animations to the details page when loaded.
-function animateDetailsPage() {
-    $('#launch-overview-icon').removeClass("launch-overview-animation");
-    $('#launch-overview-icon').addClass("launch-overview-animation");
-
-    $('#weather-icon').removeClass("weather-animation");
-    $('#weather-icon').addClass("weather-animation");
-
-    $('#mission-icon').removeClass("mission-animation");
-    $('#mission-icon').addClass("mission-animation");
-
-    $('#launch-pad-icon').removeClass("launch-pad-animation");
-    $('#launch-pad-icon').addClass("launch-pad-animation");
-
-    $('#map-icon').removeClass("map-animation");
-    $('#map-icon').addClass("map-animation");
-}
 
 // Creates a Google map object based on a Launch JSON object and places it in a DOM object clarified by the "id" parameter passed
 function createMap(launch, id) {

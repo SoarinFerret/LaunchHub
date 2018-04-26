@@ -158,12 +158,13 @@
                                         </div>
                                     </div>
                                     <md-divider></md-divider>
-                                    <div style="height: 170px; overflow: auto;" layout="row">
+                                    <div style="height: 170px; overflow: auto;" layout="row" class="fancy-scroll-bar">
                                         <div ng-repeat="day in launch.weather.daily.data" layout="row">
                                             <md-tooltip md-direction="top">{{ day.summary }}</md-tooltip>
                                             <div style="min-width: 140px;" layout="column">
                                                 <span class="md-title">{{ day.dayOfWeek }}</span>
-                                                <span>{{ day.timeObject.getMonth() + 1 }}/{{ day.timeObject.getDate() }}/{{ day.timeObject.getFullYear() }}</span>
+                                                <span>{{ day.timeObject.getMonth() + 1 }}/{{ day.timeObject.getDate() }}/{{ day.timeObject.getFullYear()
+                                                    }}</span>
                                                 <br>
                                                 <span>High: {{ day.temperatureHigh | number : 0 }}&deg;F</span>
                                                 <span>Low: {{ day.temperatureLow | number : 0 }}&deg;F</span>
