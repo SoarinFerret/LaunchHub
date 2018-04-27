@@ -197,7 +197,10 @@ app.controller('About_Controller', function ($scope) {
         githubUsername: "",
     }, {
         name: "Cody Ernesti",
-        description: `TODO`,
+        description: `Cody is graduating from the University of Nebraska at
+        Omaha this May with a bachelors degree in Cybersecurity and a minor
+        in Computer Science. In additon, he works in Network Operations for
+        the Educational Service Unit #2.`,
         githubUsername: "SoarinFerret",
     }, {
         name: "Daniel Goudie",
