@@ -5,7 +5,8 @@
     <title>Launch Viewer</title>
     <link rel="shortcut icon" href="./images/favicon.ico" />
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+    <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+        crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./css/material-components-web.min.css" />
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
@@ -53,7 +54,9 @@
             <section class="mdc-toolbar__section mdc-toolbar__section--align-end" role="toolbar">
                 <a class="mdc-toolbar__icon mdc-ripple-upgraded--unbounded mdc-ripple-upgraded toggle" style="--mdc-ripple-fg-size:28.799999999999997px; --mdc-ripple-left:10px; --mdc-ripple-top:10px; --mdc-ripple-fg-scale:1.6666666666666667;"
                     aria-label="About" alt="About" target="_blank" href="https://github.com/SoarinFerret/ISQA-4380FinalProject/">
-                    <md-tooltip md-direction="down">View on GitHub</md-tooltip><img src="images/gh.png" style="width: 24px; height: 24px;"></a>
+                    <md-tooltip md-direction="down">View on GitHub</md-tooltip>
+                    <img src="images/gh.png" style="width: 24px; height: 24px;">
+                </a>
                 <a class="material-icons mdc-toolbar__icon mdc-ripple-upgraded--unbounded mdc-ripple-upgraded toggle" style="--mdc-ripple-fg-size:28.799999999999997px; --mdc-ripple-left:10px; --mdc-ripple-top:10px; --mdc-ripple-fg-scale:1.6666666666666667;"
                     aria-label="About" alt="About" href="#!/contributors">
                     <md-tooltip md-direction="down">Contributors</md-tooltip>group</a>
@@ -85,10 +88,21 @@
                 <md-divider style="border-top-color: #E4E4E4; margin-bottom: 15px;"></md-divider>
                 <div layout="row">
                     <div flex></div>
-                    <span class="" style="color: #AAAAAA; margin-top: 0%;">Copyright &copy; 2018 -&nbsp;
-                        <a href="#!/about" class="underline-on-hover" style="color: #AAAAAA;">About LaunchHub -&nbsp;</a>
-                        <a href="#!/contributors" class="underline-on-hover" style="color: #AAAAAA;">Contributors</a>
-                    </span>
+                    <div layout="row" class="footer-wrapper">
+                        <style>
+                            .footer-wrapper > span, .footer-wrapper > a {
+                                padding: 5px;
+                                color: #AAAAAA;
+                            }
+                        </style>
+                        <div flex></div>
+                        <span>Copyright &copy; 2018</span>
+                        <span>|</span>
+                        <a href="#!/about" class="underline-on-hover">About LaunchHub</a>
+                        <span>|</span>
+                        <a href="#!/contributors" class="underline-on-hover">Contributors</a>
+                        <div flex></div>
+                    </div>
                     <div flex></div>
                 </div>
             </div>
