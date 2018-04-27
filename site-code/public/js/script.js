@@ -199,8 +199,11 @@ app.controller('Contributors_Controller', function ($scope) {
     $scope.devs = [];
     $scope.devs.push({
         name: "Collin Buus",
-        description: `TODO`,
-        githubUsername: "",
+        description: `Collin is a senior at the University of Nebraska 
+		at Omaha studying Management Information Systems and minoring in 
+		IT Inovations. He works at Banyan Medical Systems as a software developer 
+		using C#`,
+        githubUsername: "cbuus",
     }, {
         name: "Cody Ernesti",
         description: `Cody is graduating from the University of Nebraska at
