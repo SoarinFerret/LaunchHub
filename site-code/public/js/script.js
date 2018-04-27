@@ -188,7 +188,28 @@ app.controller('About_Controller', function ($scope) {
         name: "Docker Compose",
         link: "https://docs.docker.com/compose/",
         description: "What now seems to be the defacto deployment method, docker-compose allows us to build scalable, cross-platform, and easily replicated environments for both production and development purposes."
-    })
+    });
+
+    $scope.devs = [];
+    $scope.devs.push({
+        name: "Collin Buus",
+        description: `TODO`,
+        githubUsername: "",
+    }, {
+        name: "Cody Ernesti",
+        description: `TODO`,
+        githubUsername: "SoarinFerret",
+    }, {
+        name: "Daniel Goudie",
+        description: `Daniel is a senior at the University of Nebraska at 
+        Omaha studying cybersecurity and computer science. He works at 
+        Union Pacific Railroad as a junior software developer.`,
+        githubUsername: "dgoudie",
+    }, {
+        name: "Yuqi Kang",
+        description: `TODO`,
+        githubUsername: "",
+    });
 });
 
 app.controller('Launch_Detail_Controller', function ($scope, Data_Transfer_Service, $location, $http) {
@@ -201,17 +222,24 @@ app.controller('Launch_Detail_Controller', function ($scope, Data_Transfer_Servi
     //Scroll page
     $(window).scrollTo(195, 200);
 
-    angular.element(document).ready(setTimeout(function() {
+    var loopCounter = 0;
+    var interval = setInterval(function () {
+        console.log(loopCounter);
         var leftColumnHeight = $('#launch-overview-card').height() + $('#rocket-card').height() + $('#weather-card').height();
         var rightColumnHeight = $('#mission-card').height() + $('#launch-pad-card').height();
         if (leftColumnHeight > rightColumnHeight) {
-            $('#launch-pad-card').animate({height:$('#launch-pad-card').height() + leftColumnHeight - rightColumnHeight + 20}, 500, 'easeOutQuad');
+            $('#launch-pad-card').animate({
+                height: $('#launch-pad-card').height() + leftColumnHeight - rightColumnHeight + 20
+            }, 500, 'easeOutQuad');
             $('#launch-pad-agencies-div').css('padding-bottom', 45);
         } else if (rightColumnHeight > leftColumnHeight) {
             var increaseValue = rightColumnHeight - leftColumnHeight - 93;
-            $('#weather-div').animate({height:$('#weather-card').height() + increaseValue}, 500, 'easeOutQuad');
+            $('#weather-div').animate({
+                height: $('#weather-card').height() + increaseValue
+            }, 500, 'easeOutQuad');
         }
-    }, 500));
+        if (++loopCounter == 50) clearInterval(interval);
+    }, 100)
     if ($scope.launch.location == null) return;
     $http.get("/api/weather?loc=" + $scope.launch.location.pads[0].latitude + "," + $scope.launch.location.pads[0].longitude).then(function (response) {
 
@@ -294,8 +322,8 @@ function createMap(launch, id) {
 }
 
 // Reverse order of Recent Launches
-app.filter('reverse', function() {
-    return function(items) {
+app.filter('reverse', function () {
+    return function (items) {
         return items.slice().reverse();
     };
 });
