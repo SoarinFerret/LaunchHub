@@ -25,6 +25,10 @@ app.config(function ($routeProvider) {
             templateUrl: '../about.html',
             controller: 'About_Controller'
         })
+        .when('/contributors', {
+            templateUrl: '../contributors.html',
+            controller: 'Contributors_Controller'
+        })
         .when('/launchdetail', {
             templateUrl: '../launchdetail.html',
             controller: 'Launch_Detail_Controller'
@@ -189,7 +193,9 @@ app.controller('About_Controller', function ($scope) {
         link: "https://docs.docker.com/compose/",
         description: "What now seems to be the defacto deployment method, docker-compose allows us to build scalable, cross-platform, and easily replicated environments for both production and development purposes."
     });
-
+});
+app.controller('Contributors_Controller', function ($scope) {
+    $(window).scrollTo(0, 200);
     $scope.devs = [];
     $scope.devs.push({
         name: "Collin Buus",
@@ -200,7 +206,10 @@ app.controller('About_Controller', function ($scope) {
         githubUsername: "cbuus",
     }, {
         name: "Cody Ernesti",
-        description: `TODO`,
+        description: `Cody is graduating from the University of Nebraska at
+        Omaha this May with a bachelors degree in Cybersecurity and a minor
+        in Computer Science. In additon, he works in Network Operations for
+        the Educational Service Unit #2.`,
         githubUsername: "SoarinFerret",
     }, {
         name: "Daniel Goudie",
@@ -210,11 +219,13 @@ app.controller('About_Controller', function ($scope) {
         githubUsername: "dgoudie",
     }, {
         name: "Yuqi Kang",
-        description: `TODO`,
-        githubUsername: "",
+        description: `Yuqi is a senior at the University of Nebraska at 
+	Omaha studying Management Information Systems. She will go to 
+	graduate school to study Data Science and she is passion about 
+	data analysis.`,
+        githubUsername: "yuqikang",
     });
 });
-
 app.controller('Launch_Detail_Controller', function ($scope, Data_Transfer_Service, $location, $http) {
     //Get the launch we stored in the service
     $scope.launch = Data_Transfer_Service.get();
