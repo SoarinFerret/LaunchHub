@@ -224,19 +224,14 @@ app.controller('Launch_Detail_Controller', function ($scope, Data_Transfer_Servi
 
     var loopCounter = 0;
     var interval = setInterval(function () {
-        console.log(loopCounter);
         var leftColumnHeight = $('#launch-overview-card').height() + $('#rocket-card').height() + $('#weather-card').height();
         var rightColumnHeight = $('#mission-card').height() + $('#launch-pad-card').height();
         if (leftColumnHeight > rightColumnHeight) {
-            $('#launch-pad-card').animate({
-                height: $('#launch-pad-card').height() + leftColumnHeight - rightColumnHeight + 20
-            }, 500, 'easeOutQuad');
+            $('#launch-pad-card').height($('#launch-pad-card').height() + leftColumnHeight - rightColumnHeight + 20);
             $('#launch-pad-agencies-div').css('padding-bottom', 45);
         } else if (rightColumnHeight > leftColumnHeight) {
             var increaseValue = rightColumnHeight - leftColumnHeight - 93;
-            $('#weather-div').animate({
-                height: $('#weather-card').height() + increaseValue
-            }, 500, 'easeOutQuad');
+            $('#weather-div').height($('#weather-card').height() + increaseValue);
         }
         if (++loopCounter == 50) clearInterval(interval);
     }, 100)
