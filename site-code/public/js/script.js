@@ -221,7 +221,7 @@ app.controller('Contributors_Controller', function ($scope) {
         name: "Yuqi Kang",
         description: `Yuqi is a senior at the University of Nebraska at 
 	Omaha studying Management Information Systems and a minor in Computer Science. She will go to 
-	graduate school to study Data Science and she is passion about 
+	graduate school to study Data Science after and she is passion about 
 	data analysis.`,
         githubUsername: "yuqikang",
     });
