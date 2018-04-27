@@ -5,6 +5,8 @@
     <title>Launch Viewer</title>
     <link rel="shortcut icon" href="./images/favicon.ico" />
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+        crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./css/material-components-web.min.css" />
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
@@ -20,6 +22,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-messages.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.2/jquery.scrollTo.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
     <script src="./js/script.js"></script>
     <script src="./js/material-components-web.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDiQJlIJdOGVvuUXT-IlrQr_LV7f_GRzlo" async defer></script>
@@ -44,52 +47,90 @@
             <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
                 <a class="material-icons mdc-toolbar__icon mdc-toolbar__menu-icon mdc-ripple-upgraded--unbounded mdc-ripple-upgraded scroll-top"
                     style="--mdc-ripple-fg-size:28.799999999999997px; --mdc-ripple-left:10px; --mdc-ripple-top:10px; --mdc-ripple-fg-scale:1.6666666666666667;"
-                    aria-label="Home" href="#!/" alt="Home">home</a>
+                    aria-label="Home" href="#!/" alt="Home">
+                    <md-tooltip md-direction="down">Home</md-tooltip>home</a>
                 <a class="mdc-toolbar__title mdc-theme--text-primary-on-primary underline-on-hover scroll-top" href="#!/">LaunchHub</a>
             </section>
             <section class="mdc-toolbar__section mdc-toolbar__section--align-end" role="toolbar">
+                <a class="mdc-toolbar__icon mdc-ripple-upgraded--unbounded mdc-ripple-upgraded toggle" style="--mdc-ripple-fg-size:28.799999999999997px; --mdc-ripple-left:10px; --mdc-ripple-top:10px; --mdc-ripple-fg-scale:1.6666666666666667;"
+                    aria-label="About" alt="About" target="_blank" href="https://github.com/SoarinFerret/ISQA-4380FinalProject/">
+                    <md-tooltip md-direction="down">View on GitHub</md-tooltip>
+                    <img src="images/gh.png" style="width: 24px; height: 24px;">
+                </a>
                 <a class="material-icons mdc-toolbar__icon mdc-ripple-upgraded--unbounded mdc-ripple-upgraded toggle" style="--mdc-ripple-fg-size:28.799999999999997px; --mdc-ripple-left:10px; --mdc-ripple-top:10px; --mdc-ripple-fg-scale:1.6666666666666667;"
-                    aria-label="About" alt="About" id="menuButton">more_vert</a>
-                <div class="mdc-menu-anchor">
+                    aria-label="About" alt="About" href="#!/contributors">
+                    <md-tooltip md-direction="down">Contributors</md-tooltip>group</a>
+                <a class="material-icons mdc-toolbar__icon mdc-ripple-upgraded--unbounded mdc-ripple-upgraded toggle" style="--mdc-ripple-fg-size:28.799999999999997px; --mdc-ripple-left:10px; --mdc-ripple-top:10px; --mdc-ripple-fg-scale:1.6666666666666667;"
+                    aria-label="About" alt="About" href="#!/about">
+                    <md-tooltip md-direction="down">About</md-tooltip>info</a>
+                <!-- <div class="mdc-menu-anchor">
                     <div class="mdc-menu" tabindex="-1" id="menu" style="transform-origin: right top 0px; right: 0px; top: 0px; background: #fff;">
                         <ul class="mdc-menu__items mdc-list" role="menu" aria-hidden="true" style="transform: scale(1, 1);">
-                            <a href="#!/about" class="mdc-list-item" role="menuitem" tabindex="0" style="transition-delay: 0.069s;">View on GitHub</a>
+                            <a href="https://github.com/SoarinFerret/ISQA-4380FinalProject/" class="mdc-list-item" role="menuitem" tabindex="0" style="transition-delay: 0.069s;">View on GitHub</a>
                             <li class="mdc-list-divider" role="separator"></li>
                             <a href="#!/about" class="mdc-list-item" role="menuitem" tabindex="0" style="transition-delay: 0.069s;">About</a>
                         </ul>
                     </div>
-                </div>
+                </div> -->
             </section>
         </div>
     </header>
-    <script>
-        $('.underline-on-hover').hover(function () {
-            $(this).css({
-                'text-decoration': 'underline'
-            });
-        }, function () {
-            $(this).css({
-                'text-decoration': 'none'
-            });
-        });
-        $('.scroll-top').click(function () {
-            $(window).scrollTo(0, 200);
-        });
-        var toolbar = mdc.toolbar.MDCToolbar.attachTo(document.querySelector('.mdc-toolbar'));
-        toolbar.fixedAdjustElement = document.querySelector('.mdc-toolbar-fixed-adjust');
-        var menuEl = document.querySelector('#menu');
-        var menu = new mdc.menu.MDCMenu(menuEl);
-        var toggle = document.querySelector('#menuButton');
-        toggle.addEventListener('click', function () {
-            menu.open = !menu.open;
-        });
-    </script>
     <!-- MAIN CONTENT AND INJECTED VIEWS -->
     <main id="main" class="mdc-toolbar-fixed-adjust mdc-theme--background" style="margin-top: 256px">
 
         <!-- this is where content will be injected -->
         <div ng-view></div>
     </main>
+    <footer id="footer" class="mdc-theme--background">
+        <div layout="row" style="padding-top: 1%; padding-bottom: 1%;">
+            <div flex></div>
+            <div style="width: 90%; max-width: 30%;">
+                <md-divider style="border-top-color: #E4E4E4; margin-bottom: 15px;"></md-divider>
+                <div layout="row">
+                    <div flex></div>
+                    <div layout="row" class="footer-wrapper">
+                        <style>
+                            .footer-wrapper > span, .footer-wrapper > a {
+                                padding: 5px;
+                                color: #AAAAAA;
+                            }
+                        </style>
+                        <div flex></div>
+                        <span>Copyright &copy; 2018</span>
+                        <span>|</span>
+                        <a href="#!/contributors" class="underline-on-hover">Contributors</a>
+                        <span>|</span>
+                        <a href="#!/about" class="underline-on-hover">About LaunchHub</a>
+                        <div flex></div>
+                    </div>
+                    <div flex></div>
+                </div>
+            </div>
+            <div flex></div>
+        </div>
+    </footer>
 </body>
+<script>
+    $('.underline-on-hover').hover(function () {
+        $(this).css({
+            'text-decoration': 'underline'
+        });
+    }, function () {
+        $(this).css({
+            'text-decoration': 'none'
+        });
+    });
+    $('.scroll-top').click(function () {
+        $(window).scrollTo(0, 200);
+    });
+    var toolbar = mdc.toolbar.MDCToolbar.attachTo(document.querySelector('.mdc-toolbar'));
+    toolbar.fixedAdjustElement = document.querySelector('.mdc-toolbar-fixed-adjust');
+    // var menuEl = document.querySelector('#menu');
+    // var menu = new mdc.menu.MDCMenu(menuEl);
+    // var toggle = document.querySelector('#menuButton');
+    // toggle.addEventListener('click', function () {
+    //     menu.open = !menu.open;
+    // });
+</script>
 
 </html>

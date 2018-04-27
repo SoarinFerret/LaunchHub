@@ -1,3 +1,15 @@
+<style>
+    h1,
+    h2,
+    p,
+    md-card {
+        color: #fff;
+    }
+
+    h2 {
+        margin-bottom: 10px;
+    }
+</style>
 <div layout="row" style="padding-top: 10px;">
     <div flex></div>
     <div style="width: 90%; max-width: 1280px;">
@@ -5,21 +17,44 @@
         <div layout="row">
             <div flex></div>
             <div class="mdc-typography">
+                <h1 id="homeHeader" class="md-display-2" style="color: #CACACA; margin-top: 0px; margin-bottom: 15px;">About LaunchHub</h1>
             </div>
+
+            <div flex></div>
+        </div>
         <md-divider style="border-top-color: #C4C4C4; margin-bottom: 15px;"></md-divider>
-        
-   <!-- End Header -->
+        <!-- End Header -->
+
+        <div>
+            <!-- Overview -->
+            <h2 class="md-headline" style="color: #fff; margin-top: 0px; margin-bottom: 13px;">Overview</h1>
+            <md-divider style="border-top-color: #555555; margin-bottom: 15px;"></md-divider>
+            <p>LaunchHub is a centralized source to receive information on recent and future rocket launches all around the
+                world, aggregating location and weather data for each.</p>
+            <br>
+
+            <!-- APIs Used -->
+            <h2 class="md-headline">APIs Used</h2>
+            <md-divider style="border-top-color: #555555; margin-bottom: 15px;"></md-divider>
+            <p>Below are the APIs we used when building this application.</p>
+            <br>
+            <div ng-repeat="api in apis">
+                <h2 class="md-title">{{ api.name }} [<a class="md-subhead" href="{{ api.link }}" target="_blank">Documentation</a>]</h2>
+                <p>{{ api.description }}</p>
+                <br>
+            </div>
+
+            <!-- Technologies Used -->
+            <h2 class="md-headline">Technologies Used</h2>
+            <md-divider style="border-top-color: #555555; margin-bottom: 15px;"></md-divider>
+            <p>To accomplish this project, we are using multiple APIs and technologies to perform all the necessary requirements.</p>
+            <br>
+            <div ng-repeat="technology in technologies">
+                <h2 class="md-title">{{ technology.type }}: {{ technology.name }} [<a class="md-subhead" href="{{ technology.link }}" target="_blank">Documentation</a>]</h2>
+                <p>{{ technology.description }}</p>
+                <br>
+            </div>
+        </div>
     </div>
     <div flex></div>
-    <!--content--> 
-  
-    <body>
-    <div flex></div>
-       	<div>
-                <h2 class="md-display-2" text-align: center style = "color: #fff; margin-top: 10px; margin-bottom: 15px;">Our Story</h2>
-                <p  text-align: center style = "color: #fff; margin-top: 10px; margin-bottom: 15px;">Space Launch is the earliest part of a light that reaches space. Space launch involves liftoff, when a rocket or other space launch vehicle leaves the ground, floating ship or midair aircraft at the start of a flight. Our Launch Hub is a place that store the launches around the world and detailed information about the launches. This launch Hub will help people become more interesting at here</p>
-         </div>
-
-    </body>
-
 </div>

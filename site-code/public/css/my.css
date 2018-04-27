@@ -22,128 +22,27 @@ a {
 @keyframes scaleOut {
 	to {
 		opacity: 0.0;
-		transform: scale(1);
 	}
 }
 
-/* Details Page Animations */
-
-@keyframes launchOverview {
-	from {
-		transform: scaleX(0);
-	}
+.fancy-scroll-bar::-webkit-scrollbar {
+	height: 10px;
 }
 
-.launch-overview-animation {
-	animation: launchOverview 1s both ease-in;
-	animation-delay: 0.3s;
+/* Track */
+
+.fancy-scroll-bar::-webkit-scrollbar-track {
+	background: transparent;
 }
 
-@keyframes weather {
-	0% {
-		color: #000
-	}
-	25% {
-		color: orange
-	}
-	50% {
-		color: orange
-	}
-	100% {
-		color: #000
-	}
+/* Handle */
+
+.fancy-scroll-bar::-webkit-scrollbar-thumb {
+	background: rgb(255,255,255,0.5);
 }
 
-.weather-animation {
-	animation: weather 4s both ease-in-out;
-	animation-delay: 0.3s;
-}
+/* Handle on hover */
 
-@keyframes mission {
-	0% {
-		transform: rotate(0deg);
-	}
-	25% {
-		transform: rotate(-60deg);
-	}
-	75% {
-		transform: rotate(60deg);
-	}
-	100% {
-		transform: rotate(0deg);
-	}
-}
-
-.mission-animation {
-	animation: mission 4s both;
-	animation-delay: 0.3s;
-}
-
-@keyframes launchPad {
-	0% {
-		transform: rotate(0deg);
-	}
-	80% {
-		transform: rotate(-30deg);
-	}
-	100% {
-		transform: rotate(0deg);
-	}
-}
-
-.launch-pad-animation {
-	animation: launchPad 4s both ease;
-	animation-delay: 0.3s;
-}
-
-@keyframes map {
-	0% {
-		transform: translateY(0px);
-		transform: skewY(.2rad);
-	}
-	10% {
-		transform: translateY(-50px);
-		transform: skewY(0rad);
-	}
-	20% {
-		transform: translateY(0px);
-		transform: skewY(.2rad);
-	}
-	30% {
-		transform: translateY(50px);
-		transform: skewY(0rad);
-	}
-	40% {
-		transform: translateY(0px);
-		transform: skewY(.2rad);
-	}
-	50% {
-		transform: translateY(-50px);
-		transform: skewY(0rad);
-	}
-	60% {
-		transform: translateY(0px);
-		transform: skewY(.2rad);
-	}
-	70% {
-		transform: translateY(5px);
-		transform: skewY(0rad);
-	}
-	80% {
-		transform: translateY(0px);
-		transform: skewY(.2rad);
-	}
-	90% {
-		transform: translateY(-5px);
-		transform: skewY(0rad);
-	}
-	100% {
-		transform: translateY(0px);
-		transform: skewY(0rad);
-	}
-}
-
-.map-animation {
-	animation: map 4s both ease;
-	animation-delay: 0.3s;
+.fancy-scroll-bar::-webkit-scrollbar-thumb:hover {
+	background: rgb(255,255,255,0.8);
 }
