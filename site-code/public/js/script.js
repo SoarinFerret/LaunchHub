@@ -213,8 +213,11 @@ app.controller('Contributors_Controller', function ($scope) {
         githubUsername: "dgoudie",
     }, {
         name: "Yuqi Kang",
-        description: `TODO`,
-        githubUsername: "",
+        description: `Yuqi is a senior at the University of Nebraska at 
+	Omaha studying Management Information Systems. She will go to 
+	graduate school to study Data Science and she is passion about 
+	data analysis.`,
+        githubUsername: "yuqikang",
     });
 });
 app.controller('Launch_Detail_Controller', function ($scope, Data_Transfer_Service, $location, $http) {
