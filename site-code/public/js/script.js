@@ -247,6 +247,7 @@ app.controller('Launch_Detail_Controller', function ($scope, Data_Transfer_Servi
             var increaseValue = rightColumnHeight - leftColumnHeight - 93;
             $('#weather-div').height($('#weather-card').height() + increaseValue);
         }
+        else if (rightColumnHeight == leftColumnHeight) clearInterval(interval);
         if (++loopCounter == 50) clearInterval(interval);
     }, 100)
     if ($scope.launch.location == null) return;
