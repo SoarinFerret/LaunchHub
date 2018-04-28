@@ -7,6 +7,10 @@ RUN apk update > /dev/null && apk add bash > /dev/null && \
 # Copy Startup file
 COPY ./docker_start.sh /start.sh
 
+# Set working directory, copy code to it
+WORKDIR /usr/src/app
+COPY ./site-code /usr/src/app
+
 EXPOSE 8080
 
 CMD [ "/start.sh" ]

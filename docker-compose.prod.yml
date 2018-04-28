@@ -3,8 +3,6 @@ version: '2'
 services:
   webapp:
     build: .
-    volumes:
-      - ./site-code:/usr/src/app
     expose:
       - "8080"
     depends_on:

@@ -1,0 +1,2 @@
+# DONT INCLUDE NODE_MODULES IN COPY
+**/node_modules
