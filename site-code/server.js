@@ -2,8 +2,12 @@
 var express = require('express');
 var path = require('path');
 var app = express();
+var os = require("os"); //So we can print hostname
 const redis = require("redis");
 const fetch = require("node-fetch");
+
+// Get Hostname for logging purposes
+var hostname = os.hostname();
 
 // Define API Keys
 const weatherApiKey = process.env.WEATHERAPIKEY;
@@ -12,7 +16,6 @@ const weatherApiKey = process.env.WEATHERAPIKEY;
 let client = null;
 var host = 'rediscache';
 var port = 6379;
-console.log("Creating redis connection at " + host + ':' + port);
 client = redis.createClient(port, host);
 
 // Time to live for launch and Weather APIs
@@ -37,10 +40,10 @@ app.get("/api/futurelaunches", (req, resp) => {
     // Check Redis for value
     client.get("/api/futurelaunches", (err, result) => {
         if (result != null ) { // If value exists in redis, return it
-            console.log("Cache hit for future launches");
+            console.log(hostname + ": Cache hit for future launches");
             resp.send(result);
         } else {
-            console.log("Cache missed for future launches");
+            console.log(hostname + ": Cache missed for future launches");
             // Fetch API result
             fetch(
                 "https://launchlibrary.net/1.3/launch/next/20"
@@ -73,10 +76,10 @@ app.get("/api/pastlaunches", (req, resp) => {
     // Check Redis for value
     client.get("/api/pastlaunches", (err, result) => {
         if (result != null ) { // If value exists in redis, return it
-            console.log("Cache hit for past launches");
+            console.log(hostname + ": Cache hit for past launches");
             resp.send(result);
         } else {
-            console.log("Cache missed for past launches");
+            console.log(hostname + ": Cache missed for past launches");
             // Update date variables if cache miss
             var today = new Date(Date.now());
             var month = (parseInt(today.getUTCMonth())+1); // Because JS UTC months start at 0 for some reason
@@ -114,17 +117,16 @@ app.get("/api/pastlaunches", (req, resp) => {
     Value automatically flush from redis based on TTL value above */
 
 app.get("/api/weather", (req, resp) => {
-    // Grab value 'loc' from url and write to console
+    // Grab value 'loc' from url
     let term = req.query.loc;
-    console.log("Location is " + req.query.loc);
 
     // Check Redis for value
     client.get("/api/weather" + term, (err, result) => {
         if (result != null){ // If value exists in redis, return it
-            console.log("Cache hit for weather");
+            console.log(hostname + ": Cache hit for weather");
             resp.send(result);
         } else {
-            console.log("Cache missed for weather");
+            console.log(hostname + ": Cache missed for weather");
             // Fetch API result
             fetch(
                 " https://api.darksky.net/forecast/" +
@@ -153,4 +155,4 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // listener
 app.listen(8080);
-console.log("App listening on port 8080");
+console.log(hostname + ": App listening on port 8080");
