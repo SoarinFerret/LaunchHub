@@ -107,6 +107,12 @@ Your docker_start.sh is somehow invalid. Most likely, it is using Windows line e
 ```
 $ dos2unix docker_start.sh
 ```
+## Cannot start service webapp: "exec: \"/start.sh\": permission denied"
+No execution rights for the '''docker_start.sh''' file. To fix:
+```
+$ chmod +x ./docker_start.sh
+$ docker-compose build --no-cache
+```
 ## Need to Reset Redis Cache
 ```
 $ docker rm rediscache -f
