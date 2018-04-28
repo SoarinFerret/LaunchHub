@@ -45,7 +45,7 @@ app.controller('Upcoming_Controller', function ($scope, $location, Data_Transfer
     $(window).scrollTo(0, 200);
     $(document).ready(setTimeout(function () {
         ajaxRequest($scope, $location, Data_Transfer_Service);
-    }, 500));
+    }, 400));
 });
 
 app.controller('Recent_Controller', function ($scope, $location, Data_Transfer_Service) {
@@ -54,7 +54,7 @@ app.controller('Recent_Controller', function ($scope, $location, Data_Transfer_S
     $(window).scrollTo(0, 200);
     $(document).ready(setTimeout(function () {
         ajaxRequest($scope, $location, Data_Transfer_Service);
-    }, 500));
+    }, 400));
 });
 
 function ajaxRequest($scope, $location, Data_Transfer_Service, future) {
@@ -109,18 +109,22 @@ function ajaxRequest($scope, $location, Data_Transfer_Service, future) {
                 switch ($scope.launches[i].status) {
                     case 1: {
                         $scope.launches[i].status = "Green";
+                        $scope.launches[i].statusColor = "#28B463";
                         break;
                     }
                     case 2: {
                         $scope.launches[i].status = "Red";
+                        $scope.launches[i].statusColor = "crimson";
                         break;
                     }
                     case 3: {
                         $scope.launches[i].status = "Success";
+                        $scope.launches[i].statusColor = "#28B463";
                         break;
                     }
                     case 4: {
                         $scope.launches[i].status = "Failure";
+                        $scope.launches[i].statusColor = "crimson";
                         break;
                     }
                 }

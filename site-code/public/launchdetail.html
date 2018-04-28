@@ -11,41 +11,37 @@
 
         <div layout="row">
             <div flex="50" layout="column" style="margin-right: 10px;">
-                <md-card id="launch-overview-card" style="background-color: #E4E4E4; min-height: 100px; padding: 20px; margin: 0px; margin-bottom: 20px;">
+                <style>
+                    .launch-overview-wrapper p {
+                        margin-bottom: 0px;
+                    }
+                </style>
+                <md-card id="launch-overview-card" style="background-color: #E4E4E4; min-height: 100px; padding: 20px; margin: 0px; margin-bottom: 20px;"
+                    class="launch-overview-wrapper">
                     <div layout="row">
                         <h2 class="md-headline" style="margin-top: 0px;">
                             <md-icon id="launch-overview-icon" md-font-set="material-icons" style="color: #000; font-size: 28px; margin-bottom: 8px; margin-right: 10px;">
                                 toc </md-icon>Launch Overview</h2>
                         <div flex></div>
                     </div>
-                    <div layout="row" style="margin-bottom: 15px;">
-                        <span class="md-subhead">Mission Name</span>
-                        <span style="margin-left: 10px;">-</span>
-                        <span class="md-subhead" style="margin-left: 10px;">
-                            <i>{{ launch.name }}</i>
-                        </span>
+                    <div layout="row">
+                        <h2 class="md-headline" style="font-size: 27px; margin-top: 5px; margin-bottom:0px;">{{ launch.name }}</h2>
+                        <div flex></div>
+                        <mdcard style="margin-left: 20px;">
+                            <div layout="row">
+                                <div style="margin-left: 0px; margin-right: 0px; padding: 7px; background-color: #1E2528; color: #C4C4C4">Status</div>
+                                <div style="margin-left: 0px; padding: 7px; background-color: {{launch.statusColor}}; color: white">{{ launch.status }}</div>
+                            </div>
+                        </mdcard>
                     </div>
-                    <div layout="row" style="margin-bottom: 15px;">
-                        <span class="md-subhead">Rocket</span>
-                        <span style="margin-left: 10px;">-</span>
-                        <span class="md-subhead" style="margin-left: 10px;">
-                            <i>{{ launch.rocket.name }}</i>
+                    <p>Date &amp; Time: {{ launch.windowend }}</p>
+                    <p>Rocket: {{ launch.rocket.name }}</p>
+                    <p>Live Stream:
+                        <a ng-if="launch.vidURLs.length > 0" target="_blank" href="{{ launch.vidURLs[0] }}">{{ launch.vidURLs[0] }}</a>
+                        <span ng-if="launch.vidURLs.length == 0" target="_blank" style="color: #999999;">
+                            <i>Not Available.</i>
                         </span>
-                    </div>
-                    <div layout="row" style="margin-bottom: 15px;">
-                        <span class="md-subhead">Date &amp; Time</span>
-                        <span style="margin-left: 10px;">-</span>
-                        <span class="md-subhead" style="margin-left: 10px;">
-                            <i>{{ launch.net }}</i>
-                        </span>
-                    </div>
-                    <div ng-if="launch.vidURLs.length == 1" layout="row" style="margin-bottom: 15px;">
-                        <span class="md-subhead">Live Stream</span>
-                        <span style="margin-left: 10px;">-</span>
-                        <span class="md-subhead" style="margin-left: 10px;">
-                            <a target="_blank" href="{{ launch.vidURLs[0] }}">Link</a>
-                        </span>
-                    </div>
+                    </p>
                 </md-card>
                 <md-card id="rocket-card" style="background-color: #E4E4E4; min-height: 100px; margin: 0px; margin-bottom: 20px;">
                     <div style="padding: 20px; padding-bottom: 0px;">
@@ -164,7 +160,8 @@
                                             <div style="min-width: 140px;" layout="column">
                                                 <span class="md-title">{{ day.dayOfWeek }}</span>
                                                 <span>{{ day.timeObject.getMonth() + 1 }}/{{ day.timeObject.getDate() }}/{{ day.timeObject.getFullYear()
-                                                    }}</span>
+                                                    }}
+                                                </span>
                                                 <br>
                                                 <span>High: {{ day.temperatureHigh | number : 0 }}&deg;F</span>
                                                 <span>Low: {{ day.temperatureLow | number : 0 }}&deg;F</span>

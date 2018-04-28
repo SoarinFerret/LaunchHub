@@ -1,7 +1,8 @@
 <div layout="row" style="padding-top: 10px;">
     <div flex></div>
     <div style="width: 90%; max-width: 1280px;">
-        <md-card id="welcomeCard" style="padding: 16px;margin-left: 0px;margin-right: 0px;background-color: #1a2123;color:white;" ng-if="future">
+        <md-card id="welcomeCard" style="padding: 16px;margin-left: 0px;margin-right: 0px;background-color: #1a2123;color:white;"
+            ng-if="future">
             <div layout="row">
                 <span class="md-headline">Welcome!</span>
                 <div flex></div>
@@ -27,8 +28,10 @@
                 <h1 id="homeHeader" class="md-display-2" style="color: #CACACA; margin-top: 0px; margin-bottom: 15px;" ng-if="future == false">Recent Launches</h1>
             </div>
             <div flex></div>
-            <md-button id="viewButton" ng-href="#!/recentlaunches" class="md-accent md-hue-2" style="height: 30px; margin-top: 20px;margin-right: 0px;" ng-if="future">View Recent Launches</md-button>
-            <md-button id="viewButton" ng-href="#!/upcoming" class="md-accent md-hue-2" style="height: 30px; margin-top: 20px;margin-right: 0px;" ng-if="future == false">View Upcoming Launches</md-button>
+            <md-button id="viewButton" ng-href="#!/recentlaunches" class="md-accent md-hue-2" style="height: 30px; margin-top: 20px;margin-right: 0px;"
+                ng-if="future">View Recent Launches</md-button>
+            <md-button id="viewButton" ng-href="#!/upcoming" class="md-accent md-hue-2" style="height: 30px; margin-top: 20px;margin-right: 0px;"
+                ng-if="future == false">View Upcoming Launches</md-button>
         </div>
         <md-divider style="border-top-color: #E4E4E4; margin-bottom: 15px;"></md-divider>
         <!-- End Header -->
@@ -45,15 +48,27 @@
 
                             <!-- Card Text and Info Here -->
 
-                            <h2 class="md-headline" style="margin-top: 5px">{{ launch.name }}</h2>
-                            <p>Launch Status: {{ launch.status }}</p>
-                            <p>Launch Date &amp; Time: {{ launch.windowend }}</p>
-                            <p ng-if="launch.vidURLs.length == 1">Launch Live Stream
-                                <a target="_blank" href="{{ launch.vidURLs[0] }}">Here</a>
+                            <div layout="row">
+                                <h2 class="md-headline" style="font-size: 27px; margin-top: 5px; margin-bottom:0px;">{{ launch.name }}</h2>
+                                <div flex></div>
+                                <mdcard style="margin-left: 20px;">
+                                    <div layout="row">
+                                        <div style="margin-left: 0px; margin-right: 0px; padding: 7px; background-color: #1E2528; color: #C4C4C4">Status</div>
+                                        <div style="margin-left: 0px; padding: 7px; background-color: {{launch.statusColor}}; color: white">{{ launch.status }}</div>
+                                    </div>
+                                </mdcard>
+                            </div>
+                            <p>Date &amp; Time: {{ launch.windowend }}</p>
+                            <p>Rocket: {{ launch.rocket.name }}</p>
+                            <p>Live Stream:
+                                <a ng-if="launch.vidURLs.length > 0" target="_blank" href="{{ launch.vidURLs[0] }}">{{ launch.vidURLs[0] }}</a>
+                                <span ng-if="launch.vidURLs.length == 0" target="_blank" style="color: #999999;">
+                                    <i>Not Available.</i>
+                                </span>
                             </p>
 
+                            <md-divider style="margin-bottom: 15px;"></md-divider>
                             <div layout="column" style="margin-bottom: 55px;" ng-if="launch.missions[0].agencies.length > 0">
-                                <md-divider style="margin-bottom: 15px;"></md-divider>
                                 <div ng-switch on="launch.missions[0].agencies.length">
                                     <span ng-switch-when="1" class="md-subhead">Mission Agency:</span>
                                     <span ng-switch-default class="md-subhead">Mission Agencies:</span>
@@ -69,6 +84,9 @@
                                     </md-list-item>
                                 </md-list>
                             </div>
+                            <span ng-if="launch.missions[0].agencies == null" style="color: #999999;">
+                                <i>No Mission Agency Information Available.</i>
+                            </span>
                             <md-button ng-click="ViewDetails(launch)" style="padding-left: 15px; padding-right: 15px; position: absolute; bottom: 10px; right: 10px;"
                                 class="md-raised md-accent md-hue-2">
                                 <span style="font-size: 16px;">
