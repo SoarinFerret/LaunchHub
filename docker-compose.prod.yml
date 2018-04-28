@@ -1,0 +1,30 @@
+version: '2'
+
+services:
+  webapp:
+    build: .
+    expose:
+      - "8080"
+    depends_on:
+      - rediscache
+    links:
+      - rediscache:redis
+    env_file:
+      - ./.docker/webapp.env
+    restart: "always"
+  rediscache:
+    image: redis:alpine
+    expose:
+      - "6379"
+    restart: "always"
+  lb:
+    image: dockercloud/haproxy
+    links:
+      - webapp
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 80:80
+    restart: "always"
+    depends_on:
+      - webapp

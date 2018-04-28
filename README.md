@@ -79,9 +79,13 @@ $ docker-compose up
 ```
 Then, to view the webpage, go to your browser and type in ```http://<server_address>```. If you would like to hide the output, simple add ```-d``` to your command.
 
-If you would to scale the service out, you can certainly do so. See the docker-compose documentation [here](https://docs.docker.com/compose/reference/up/). Here is an example:
+If you don't want to map your local volume, please use the ```docker-compose.prod.yml``` override file.
 ```
-$ docker-compose up --scale webapp=3
+$ docker-compose -f docker-compose.prod.yml up
+```
+If you would to scale the service out, you can certainly do so. Make sure to use the ```docker-compose.prod.yml``` override file so the containers don't fight over the npm install on the volume. See the docker-compose documentation [here](https://docs.docker.com/compose/reference/up/). Here is an example:
+```
+$ docker-compose -f docker-compose.prod.yml up --scale webapp=3
 ```
 
 ## Manual Docker Deployment
