@@ -1,7 +1,7 @@
 <div layout="row" style="padding-top: 10px;">
     <div flex></div>
     <div style="width: 90%; max-width: 1280px;">
-        <md-card id="welcomeCard" style="padding: 16px;margin-left: 0px;margin-right: 0px;background-color: #1a2123;color:white;">
+        <md-card id="welcomeCard" style="padding: 16px;margin-left: 0px;margin-right: 0px;background-color: #1a2123;color:white;" ng-if="future">
             <div layout="row">
                 <span class="md-headline">Welcome!</span>
                 <div flex></div>
@@ -23,10 +23,12 @@
             </div>
             <div flex></div>
             <div class="mdc-typography">
-                <h1 id="homeHeader" class="md-display-2" style="color: #CACACA; margin-top: 0px; margin-bottom: 15px;">Upcoming Launches</h1>
+                <h1 id="homeHeader" class="md-display-2" style="color: #CACACA; margin-top: 0px; margin-bottom: 15px;" ng-if="future">Upcoming Launches</h1>
+                <h1 id="homeHeader" class="md-display-2" style="color: #CACACA; margin-top: 0px; margin-bottom: 15px;" ng-if="future == false">Recent Launches</h1>
             </div>
             <div flex></div>
-            <md-button id="viewButton" ng-href="#!/recentlaunches" class="md-accent md-hue-2" style="height: 30px; margin-top: 20px;margin-right: 0px;">View Recent Launches</md-button>
+            <md-button id="viewButton" ng-href="#!/recentlaunches" class="md-accent md-hue-2" style="height: 30px; margin-top: 20px;margin-right: 0px;" ng-if="future">View Recent Launches</md-button>
+            <md-button id="viewButton" ng-href="#!/upcoming" class="md-accent md-hue-2" style="height: 30px; margin-top: 20px;margin-right: 0px;" ng-if="future == false">View Upcoming Launches</md-button>
         </div>
         <md-divider style="border-top-color: #E4E4E4; margin-bottom: 15px;"></md-divider>
         <!-- End Header -->

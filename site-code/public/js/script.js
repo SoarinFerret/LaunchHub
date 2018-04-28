@@ -13,12 +13,12 @@ app.config(function ($mdThemingProvider) {
 // configure our routes
 app.config(function ($routeProvider) {
     $routeProvider
-        .when('/', {
+        .when('/upcominglaunches', {
             templateUrl: '../home.html',
             controller: 'Upcoming_Controller'
         })
         .when('/recentlaunches', {
-            templateUrl: '../recentlaunches.html',
+            templateUrl: '../home.html',
             controller: 'Recent_Controller'
         })
         .when('/about', {
@@ -34,33 +34,34 @@ app.config(function ($routeProvider) {
             controller: 'Launch_Detail_Controller'
         })
         .otherwise({
-            redirectTo: '/'
+            redirectTo: '/upcominglaunches'
         })
 });
 
 app.controller('Upcoming_Controller', function ($scope, $location, Data_Transfer_Service) {
     if (Cookies.get('previouslyVisited') == 'true') $('#welcomeCard').hide();
     $('#footer').hide();
+    $scope.future = true;
     $(window).scrollTo(0, 200);
     $(document).ready(setTimeout(function () {
-        ajaxRequest($scope, $location, Data_Transfer_Service, true);
+        ajaxRequest($scope, $location, Data_Transfer_Service);
     }, 500));
 });
 
 app.controller('Recent_Controller', function ($scope, $location, Data_Transfer_Service) {
     $('#footer').hide();
+    $scope.future = false;
     $(window).scrollTo(0, 200);
     $(document).ready(setTimeout(function () {
-        ajaxRequest($scope, $location, Data_Transfer_Service, false);
+        ajaxRequest($scope, $location, Data_Transfer_Service);
     }, 500));
 });
 
 function ajaxRequest($scope, $location, Data_Transfer_Service, future) {
-    var url = (future ? "futurelaunches" : "pastlaunches");
     $.ajax({
         async: true,
         type: "GET",
-        url: "/api/" + url,
+        url: "/api/" + ($scope.future ? "futurelaunches" : "pastlaunches"),
         contentType: "application/json",
         dataType: "json",
         success: callback()
@@ -72,6 +73,7 @@ function ajaxRequest($scope, $location, Data_Transfer_Service, future) {
             // The $scope variable is used to link variables between here and the HTML DOM. 
             // "data" variable is returned by ajax request
             $scope.launches = data.launches;
+
 
             //for (var i = $scope.launches.length-1; i > -1; i--) {
             for (var i = 0; i < $scope.launches.length; i++) {
