@@ -28,10 +28,8 @@
                 <h1 id="homeHeader" class="md-display-2" style="color: #CACACA; margin-top: 0px; margin-bottom: 15px;" ng-if="future == false">Recent Launches</h1>
             </div>
             <div flex></div>
-            <md-button id="viewButton" ng-href="#!/recentlaunches" class="md-accent md-hue-2" style="height: 30px; margin-top: 20px;margin-right: 0px;"
-                ng-if="future">View Recent Launches</md-button>
-            <md-button id="viewButton" ng-href="#!/upcoming" class="md-accent md-hue-2" style="height: 30px; margin-top: 20px;margin-right: 0px;"
-                ng-if="future == false">View Upcoming Launches</md-button>
+            <a class="mdc-button mdc-button--unelevated secondary-filled-button" style="margin-top: 20px;margin-right: 0px;" ng-href="#!/recentlaunches" ng-if="future">View Recent Launches</a>
+            <a class="mdc-button mdc-button--unelevated secondary-filled-button" style="margin-top: 20px;margin-right: 0px;" ng-href="#!/upcoming" ng-if="future == false">View Upcoming Launches</a>
         </div>
         <md-divider style="border-top-color: #E4E4E4; margin-bottom: 15px;"></md-divider>
         <!-- End Header -->
@@ -87,13 +85,9 @@
                             <span ng-if="launch.missions[0].agencies == null" style="color: #999999;">
                                 <i>No Mission Agency Information Available.</i>
                             </span>
-                            <md-button ng-click="ViewDetails(launch)" style="padding-left: 15px; padding-right: 15px; position: absolute; bottom: 10px; right: 10px;"
-                                class="md-raised md-accent md-hue-2">
-                                <span style="font-size: 16px;">
-                                    <md-icon md-font-set="material-icons" style="color: #000; font-size: 28px; margin-right: 10px; margin-bottom: 5px;">
-                                        dashboard </md-icon> View Details</span>
-                            </md-button>
-                            <!-- End Card Text and Info -->
+                            <button ng-click="ViewDetails(launch)" class="mdc-button mdc-button--unelevated" style="padding-left: 15px; padding-right: 15px; position: absolute; bottom: 10px; right: 10px;
+                            background-color: #FF9100; color: black;"><md-icon md-font-set="material-icons" style="color: #000; font-size: 28px; margin-right: 12px; padding-bottom: 6px;">
+                                    dashboard </md-icon>View Details</button>
 
                         </md-card-content>
                     </div>

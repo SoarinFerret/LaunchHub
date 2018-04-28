@@ -141,6 +141,12 @@ function ajaxRequest($scope, $location, Data_Transfer_Service, future) {
                     createMap($scope.launches[i], 'map' + i);
                 }
                 $('#loader').fadeOut(300);
+                angular.element(document).ready(function () {
+                    var buttons = document.querySelectorAll('.mdc-button, .mdc-fab');
+                    for (var i = 0, button; button = buttons[i]; i++) {
+                        mdc.ripple.MDCRipple.attachTo(button);
+                    }
+                });
             });
             $('#footer').fadeIn();
 
