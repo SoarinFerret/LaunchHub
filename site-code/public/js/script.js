@@ -106,11 +106,11 @@ function ajaxRequest($scope, $location, Data_Transfer_Service, future) {
                 }
                 switch ($scope.launches[i].status) {
                     case 1: {
-                        $scope.launches[i].status = "Good To Go";
+                        $scope.launches[i].status = "Green";
                         break;
                     }
                     case 2: {
-                        $scope.launches[i].status = "Pending";
+                        $scope.launches[i].status = "Red";
                         break;
                     }
                     case 3: {
