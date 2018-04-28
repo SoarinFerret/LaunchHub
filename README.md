@@ -47,10 +47,10 @@ A slightly less involved and easier to use version of Google's Material Design s
 
 Node.js has the benefit of just being easy to use JavaScript, without the extra bloat needed with Django. Plus, Django just has a lot of nice, but unnecessary functionality for this specific application.
 
-## Webserver: Nginx
- - [Documentation](https://docs.nginx.com/)
+## Webserver: Docker Cloud HAProxy
+ - [Documentation](https://github.com/docker/dockercloud-haproxy/tree/master)
 
-Nginx is a fast, well-documented, well-known, and easily managed web server that can act as a load balancer for our scaleable application.
+Docker Cloud's HAProxy is a fast, well-documented, well-known, and easily managed web load balancer perfect for our scalable application.
 
 ## Backend Datastore: Redis
  - [Documentation](https://redis.io/documentation)
@@ -77,7 +77,16 @@ To deploy the full application, simply run the following:
 ```
 $ docker-compose up
 ```
-Then, to view the webpage, go to your browser and type in ```http://<server_address>:8080```
+Then, to view the webpage, go to your browser and type in ```http://<server_address>```. If you would like to hide the output, simple add ```-d``` to your command.
+
+If you don't want to map your local volume, please use the ```docker-compose.prod.yml``` override file.
+```
+$ docker-compose -f docker-compose.prod.yml up
+```
+If you would to scale the service out, you can certainly do so. Make sure to use the ```docker-compose.prod.yml``` override file so the containers don't fight over the npm install on the volume. See the docker-compose documentation [here](https://docs.docker.com/compose/reference/up/). Here is an example:
+```
+$ docker-compose -f docker-compose.prod.yml up --scale webapp=3
+```
 
 ## Manual Docker Deployment
 
@@ -98,6 +107,12 @@ Your docker_start.sh is somehow invalid. Most likely, it is using Windows line e
 ```
 $ dos2unix docker_start.sh
 ```
+## Cannot start service webapp: "exec: \"/start.sh\": permission denied"
+No execution rights for the '''docker_start.sh''' file. To fix:
+```
+$ chmod +x ./docker_start.sh
+$ docker-compose build --no-cache
+```
 ## Need to Reset Redis Cache
 ```
 $ docker rm rediscache -f
@@ -107,6 +122,29 @@ $ docker-compose up
 This is because the docker build process caches each step. To ensure a clean build, use:
 ```
 $ docker-compose build --no-cache
+```
+## Docker-Compose on Windows
+```
+PS> docker-compose up
+Pulling lb (dockercloud/haproxy:)...
+latest: Pulling from dockercloud/haproxy
+1160f4abea84: Pull complete
+b0df9c632afc: Pull complete
+a49b18c7cd3a: Pull complete
+Digest: sha256:040d1b321437afd9f8c9ba40e8340200d2b0ae6cf280a929a1e8549698c87d30
+Status: Downloaded newer image for dockercloud/haproxy:latest
+Starting rediscache ... done
+Recreating isqa-4380finalproject_webapp_1 ... done
+Creating isqa-4380finalproject_lb_1       ... error
+
+ERROR: for isqa-4380finalproject_lb_1  Cannot create container for service lb: b'Mount denied:\nThe source path "\\\\var\\\\run\\\\docker.sock:/var/run/docker.sock"\nis not a valid Windows path'
+
+ERROR: for lb  Cannot create container for service lb: b'Mount denied:\nThe source path "\\\\var\\\\run\\\\docker.sock:/var/run/docker.sock"\nis not a valid Windows path'
+ERROR: Encountered errors while bringing up the project.
+```
+This is actually a bug in docker-compose, as this was working previously. You can view this wonderful gentleman's comment about it on [GitHub here](https://github.com/docker/for-win/issues/1829#issuecomment-376328022). The fix it to set an environment variable:
+```
+PS> $env:COMPOSE_CONVERT_WINDOWS_PATHS=1
 ```
 ## Any other weird docker issues
 This will essentially nuke anything stored on your docker instance:

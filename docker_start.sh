@@ -6,9 +6,9 @@ cd /usr/src/app
 GREEN='\033[0;32m'
 NC='\033[0m'
 
-# JUST IN CASE, remove Windows Line formats
+# JUST IN CASE, remove Windows Line formats in node_modules
 echo "Checking for and removing Windows line endings..."
-find . -type f -print0 | xargs -0 dos2unix > /dev/null 2>&1
+find ./node_modules -type f -print0 | xargs -0 dos2unix > /dev/null 2>&1
 echo -e "...${GREEN}done${NC}!\n"
 
 echo "Installing Node Dependencies..."

@@ -197,9 +197,9 @@ app.controller('About_Controller', function ($scope) {
         description: "Node.js has the benefit of just being easy to use JavaScript, without the extra bloat needed with Django. Plus, Django just has a lot of nice, but unnecessary functionality for this specific application."
     }, {
         type: "Webserver",
-        name: "Nginx",
-        link: "https://docs.nginx.com/",
-        description: "Node.js has the benefit of just being easy to use JavaScript, without the extra bloat needed with Django. Plus, Django just has a lot of nice, but unnecessary functionality for this specific application."
+        name: "DockerCloud HA Proxy",
+        link: "https://github.com/docker/dockercloud-haproxy/tree/master",
+        description: "Docker Cloud's HAProxy is a fast, well-documented, well-known, and easily managed web load balancer perfect for our scalable application"
     }, {
         type: "Backend Datastore",
         name: "Redis",
