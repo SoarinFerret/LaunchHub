@@ -47,10 +47,10 @@ A slightly less involved and easier to use version of Google's Material Design s
 
 Node.js has the benefit of just being easy to use JavaScript, without the extra bloat needed with Django. Plus, Django just has a lot of nice, but unnecessary functionality for this specific application.
 
-## Webserver: Nginx
- - [Documentation](https://docs.nginx.com/)
+## Webserver: Docker Cloud HAProxy
+ - [Documentation](https://github.com/docker/dockercloud-haproxy/tree/master)
 
-Nginx is a fast, well-documented, well-known, and easily managed web server that can act as a load balancer for our scaleable application.
+Docker Cloud's HAProxy is a fast, well-documented, well-known, and easily managed web load balancer perfect for our scalable application.
 
 ## Backend Datastore: Redis
  - [Documentation](https://redis.io/documentation)
