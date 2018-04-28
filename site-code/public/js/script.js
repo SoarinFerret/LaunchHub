@@ -237,19 +237,20 @@ app.controller('Launch_Detail_Controller', function ($scope, Data_Transfer_Servi
     $(window).scrollTo(195, 200);
 
     var loopCounter = 0;
-    var interval = setInterval(function () {
-        var leftColumnHeight = $('#launch-overview-card').height() + $('#rocket-card').height() + $('#weather-card').height();
-        var rightColumnHeight = $('#mission-card').height() + $('#launch-pad-card').height();
-        if (leftColumnHeight > rightColumnHeight) {
-            $('#launch-pad-card').height($('#launch-pad-card').height() + leftColumnHeight - rightColumnHeight + 20);
-            $('#launch-pad-agencies-div').css('padding-bottom', 45);
-        } else if (rightColumnHeight > leftColumnHeight) {
-            var increaseValue = rightColumnHeight - leftColumnHeight - 93;
-            $('#weather-div').height($('#weather-card').height() + increaseValue);
-        }
-        else if (rightColumnHeight == leftColumnHeight) clearInterval(interval);
-        if (++loopCounter == 50) clearInterval(interval);
-    }, 100)
+    angular.element(document).ready(function () {
+        var interval = setInterval(function () {
+            var leftColumnHeight = $('#launch-overview-card').height() + $('#rocket-card').height() + $('#weather-card').height();
+            var rightColumnHeight = $('#mission-card').height() + $('#launch-pad-card').height();
+            if (leftColumnHeight > rightColumnHeight) {
+                $('#launch-pad-card').height($('#launch-pad-card').height() + leftColumnHeight - rightColumnHeight + 20);
+                $('#launch-pad-agencies-div').css('padding-bottom', 45);
+            } else if (rightColumnHeight > leftColumnHeight) {
+                var increaseValue = rightColumnHeight - leftColumnHeight - 93;
+                $('#weather-div').height($('#weather-card').height() + increaseValue);
+            }
+            if (++loopCounter == 50) clearInterval(interval);
+        }, 100)
+    });
     if ($scope.launch.location == null) return;
     $http.get("/api/weather?loc=" + $scope.launch.location.pads[0].latitude + "," + $scope.launch.location.pads[0].longitude).then(function (response) {
 
