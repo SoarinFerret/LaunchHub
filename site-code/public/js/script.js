@@ -104,8 +104,26 @@ function ajaxRequest($scope, $location, Data_Transfer_Service, future) {
                         }
                     }
                 }
+                switch ($scope.launches[i].status) {
+                    case 1: {
+                        $scope.launches[i].status = "Good To Go";
+                        break;
+                    }
+                    case 2: {
+                        $scope.launches[i].status = "Pending";
+                        break;
+                    }
+                    case 3: {
+                        $scope.launches[i].status = "Success";
+                        break;
+                    }
+                    case 4: {
+                        $scope.launches[i].status = "Failure";
+                        break;
+                    }
+                }
             }
-            // Not sure what this does, but it fixed an issue I was having
+            //Changes $scope variable asyncronously
             $scope.$applyAsync();
 
             // use the $scope variable to link variables between here and the HTML
