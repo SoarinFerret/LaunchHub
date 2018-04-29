@@ -140,13 +140,11 @@ function ajaxRequest($scope, $location, Data_Transfer_Service, future) {
                 for (var i = 0; i < $scope.launches.length; i++) {
                     createMap($scope.launches[i], 'map' + i);
                 }
+                var buttons = document.querySelectorAll('.mdc-button, .mdc-fab');
+                for (var i = 0, button; button = buttons[i]; i++) {
+                    mdc.ripple.MDCRipple.attachTo(button);
+                }
                 $('#loader').fadeOut(300);
-                angular.element(document).ready(function () {
-                    var buttons = document.querySelectorAll('.mdc-button, .mdc-fab');
-                    for (var i = 0, button; button = buttons[i]; i++) {
-                        mdc.ripple.MDCRipple.attachTo(button);
-                    }
-                });
             });
             $('#footer').fadeIn();
 
@@ -279,7 +277,11 @@ app.controller('Launch_Detail_Controller', function ($scope, Data_Transfer_Servi
                 $('#weather-div').height($('#weather-card').height() + increaseValue);
             }
             if (++loopCounter == 50) clearInterval(interval);
-        }, 100)
+        }, 100);
+        var buttons = document.querySelectorAll('.mdc-button, .mdc-fab');
+        for (var i = 0, button; button = buttons[i]; i++) {
+            mdc.ripple.MDCRipple.attachTo(button);
+        }
     });
     if ($scope.launch.location == null) return;
     $http.get("/api/weather?loc=" + $scope.launch.location.pads[0].latitude + "," + $scope.launch.location.pads[0].longitude).then(function (response) {

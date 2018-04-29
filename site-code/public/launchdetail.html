@@ -50,8 +50,7 @@
                                 <md-icon id="launch-overview-icon" md-font-set="material-icons" style="color: #000; font-size: 28px; margin-bottom: 8px; margin-right: 10px;">
                                     change_history</md-icon>Rocket</h2>
                             <div flex></div>
-                            <md-button ng-if="launch.rocket.wikiURL.length > 0" ng-href="{{ launch.rocket.wikiURL }}" style="height: 30px; margin: 0px;"
-                                class="md-accent md-hue-3" target="_blank">More Info</md-button>
+                            <a class="mdc-button mdc-theme--secondary" ng-if="launch.rocket.wikiURL.length > 0" ng-href="{{ launch.rocket.wikiURL }}" style="margin: 0px;" target="_blank">More Info</a>
                         </div>
                         <div layout="row" style="margin-bottom: 15px;">
                             <span class="md-subhead">Name</span>
@@ -229,8 +228,7 @@
                                 <md-icon id="launch-pad-icon" md-font-set="material-icons" style="color: #000; font-size: 28px; margin-bottom: 8px; margin-right: 10px;">
                                     flight_takeoff </md-icon>Launch Pad</h2>
                             <div flex></div>
-                            <md-button ng-if="launch.location.pads[0].wikiURL.length > 0" ng-href="{{ launch.location.pads[0].wikiURL }}" style="height: 30px; margin: 0px;"
-                                class="md-accent md-hue-3" target="_blank">More Info</md-button>
+                            <a class="mdc-button mdc-theme--secondary" ng-if="launch.location.pads[0].wikiURL.length > 0" ng-href="{{ launch.location.pads[0].wikiURL }}" style="margin: 0px;" target="_blank">More Info</a>
                         </div>
                         <div layout="row" style="margin-bottom: 15px;">
                             <span class="md-subhead">Name</span>
