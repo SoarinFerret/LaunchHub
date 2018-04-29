@@ -7360,7 +7360,7 @@ a.mdc-list-item {
 
 :root {
     --mdc-theme-primary: #293D48;
-    --mdc-theme-secondary: #f4511e;
+    --mdc-theme-secondary: #FF9100;
     --mdc-theme-background: #1e2528;
     --mdc-theme-text-primary-on-primary: #fff;
     --mdc-theme-text-secondary-on-primary: hsla(0, 0%, 100%, .7);
@@ -7401,8 +7401,8 @@ a.mdc-list-item {
 }
 
 .mdc-theme--secondary {
-    color: #f4511e!important;
-    color: var(--mdc-theme-secondary, #f4511e)!important
+    color: #FF9100 !important;
+    color: var(--mdc-theme-secondary, #FF9100 )!important
 }
 
 .mdc-theme--text-primary-on-primary {

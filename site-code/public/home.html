@@ -28,8 +28,13 @@
                 <h1 id="homeHeader" class="md-display-2" style="color: #CACACA; margin-top: 0px; margin-bottom: 15px;" ng-if="future == false">Recent Launches</h1>
             </div>
             <div flex></div>
-            <a class="mdc-button mdc-button--unelevated secondary-filled-button" style="margin-top: 20px;margin-right: 0px;" ng-href="#!/recentlaunches" ng-if="future">View Recent Launches</a>
-            <a class="mdc-button mdc-button--unelevated secondary-filled-button" style="margin-top: 20px;margin-right: 0px;" ng-href="#!/upcoming" ng-if="future == false">View Upcoming Launches</a>
+            <style>
+            .view-switch-buttons::after {
+                background-color: white;
+            }
+            </style>
+            <a class="mdc-button mdc-theme--secondary view-switch-buttons" style="color: black; margin-top: 20px;margin-right: 0px;" ng-href="#!/recentlaunches" ng-if="future">View Recent Launches</a>
+            <a class="mdc-button mdc-theme--secondary view-switch-buttons" style="margin-top: 20px;margin-right: 0px;" ng-href="#!/upcoming" ng-if="future == false">View Upcoming Launches</a>
         </div>
         <md-divider style="border-top-color: #E4E4E4; margin-bottom: 15px;"></md-divider>
         <!-- End Header -->
@@ -85,7 +90,12 @@
                             <span ng-if="launch.missions[0].agencies == null" style="color: #999999;">
                                 <i>No Mission Agency Information Available.</i>
                             </span>
-                            <button ng-click="ViewDetails(launch)" class="mdc-button mdc-button--raised" style="padding-left: 15px; padding-right: 15px; position: absolute; bottom: 16px; right: 16px;
+                            <style>
+                            .view-details-buttons::after {
+                                background-color: black;
+                            }
+                            </style>
+                            <button ng-click="ViewDetails(launch)" class="mdc-button mdc-button--raised view-details-buttons" style="padding-left: 15px; padding-right: 15px; position: absolute; bottom: 16px; right: 16px;
                             background-color: #FF9100; color: black;"><md-icon md-font-set="material-icons" style="color: #000; font-size: 28px; margin-right: 12px; padding-bottom: 6px;">
                                     dashboard </md-icon>View Details</button>
 

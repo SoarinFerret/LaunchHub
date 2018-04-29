@@ -107,26 +107,30 @@ function ajaxRequest($scope, $location, Data_Transfer_Service, future) {
                     }
                 }
                 switch ($scope.launches[i].status) {
-                    case 1: {
-                        $scope.launches[i].status = "Green";
-                        $scope.launches[i].statusColor = "#28B463";
-                        break;
-                    }
-                    case 2: {
-                        $scope.launches[i].status = "Red";
-                        $scope.launches[i].statusColor = "crimson";
-                        break;
-                    }
-                    case 3: {
-                        $scope.launches[i].status = "Success";
-                        $scope.launches[i].statusColor = "#28B463";
-                        break;
-                    }
-                    case 4: {
-                        $scope.launches[i].status = "Failure";
-                        $scope.launches[i].statusColor = "crimson";
-                        break;
-                    }
+                    case 1:
+                        {
+                            $scope.launches[i].status = "Green";
+                            $scope.launches[i].statusColor = "#28B463";
+                            break;
+                        }
+                    case 2:
+                        {
+                            $scope.launches[i].status = "Red";
+                            $scope.launches[i].statusColor = "crimson";
+                            break;
+                        }
+                    case 3:
+                        {
+                            $scope.launches[i].status = "Success";
+                            $scope.launches[i].statusColor = "#28B463";
+                            break;
+                        }
+                    case 4:
+                        {
+                            $scope.launches[i].status = "Failure";
+                            $scope.launches[i].statusColor = "crimson";
+                            break;
+                        }
                 }
             }
             //Changes $scope variable asyncronously
@@ -279,9 +283,11 @@ app.controller('Launch_Detail_Controller', function ($scope, Data_Transfer_Servi
             if (++loopCounter == 50) clearInterval(interval);
         }, 100);
         var buttons = document.querySelectorAll('.mdc-button, .mdc-fab');
-        for (var i = 0, button; button = buttons[i]; i++) {
-            mdc.ripple.MDCRipple.attachTo(button);
-        }
+        setTimeout(function () {
+            for (var i = 0, button; button = buttons[i]; i++) {
+                mdc.ripple.MDCRipple.attachTo(button);
+            }
+        }, 500);
     });
     if ($scope.launch.location == null) return;
     $http.get("/api/weather?loc=" + $scope.launch.location.pads[0].latitude + "," + $scope.launch.location.pads[0].longitude).then(function (response) {
