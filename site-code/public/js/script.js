@@ -40,6 +40,7 @@ app.config(function ($routeProvider) {
 
 app.controller('Upcoming_Controller', function ($scope, $location, Data_Transfer_Service) {
     if (Cookies.get('previouslyVisited') == 'true') $('#welcomeCard').hide();
+    Cookies.set('previouslyVisited', 'true');
     $('#footer').hide();
     $scope.future = true;
     $(window).scrollTo(0, 200);
@@ -49,6 +50,7 @@ app.controller('Upcoming_Controller', function ($scope, $location, Data_Transfer
 });
 
 app.controller('Recent_Controller', function ($scope, $location, Data_Transfer_Service) {
+    Cookies.set('previouslyVisited', 'true');
     $('#footer').hide();
     $scope.future = false;
     $(window).scrollTo(0, 200);
