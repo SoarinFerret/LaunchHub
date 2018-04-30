@@ -39,7 +39,11 @@ app.config(function ($routeProvider) {
 });
 
 app.controller('Upcoming_Controller', function ($scope, $location, Data_Transfer_Service) {
-    if (Cookies.get('previouslyVisited') == 'true') $('#welcomeCard').hide();
+    if (Cookies.get('previouslyVisited') == 'true') {
+        angular.element(document).ready(function () {
+            $('#welcomeCard').hide();
+        });
+    }
     Cookies.set('previouslyVisited', 'true');
     $('#footer').hide();
     $scope.future = true;
