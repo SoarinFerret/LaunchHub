@@ -18,11 +18,11 @@ services:
       - "6379"
     restart: "always"
   lb:
-    image: dockercloud/haproxy
+    image: nginx
     links:
       - webapp
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
     ports:
       - 80:80
     restart: "always"
